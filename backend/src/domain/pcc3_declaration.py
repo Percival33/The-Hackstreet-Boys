@@ -1,18 +1,34 @@
-from pydantic import BaseModel, Field, validator
-from typing import Optional
-from datetime import date
+from dataclasses import dataclass, field, fields
 
 
-class PCC3Declaration(BaseModel):
-    data_dokonania_czynnosci: date = Field(..., alias="P4", description="DATA DOKONANIA CZYNNOŚCI")
-    cel_zlozenia_deklaracji: int = Field(..., alias="P6", description="CEL ZŁOŻENIA DEKLARACJI")
-    podmiot_skladajacy_deklaracje: int = Field(..., alias="P7", description="PODMIOT SKŁADAJĄCY DEKLARACJĘ")
-    przedmiot_opodatkowania: int = Field(..., alias="P20", description="PRZEDMIOT OPODATKOWANIA")
-    miejsce_polozenia_rzeczy: Optional[int] = Field(None, alias="P21", description="MIEJSCE POŁOŻENIA RZECZY LUB WYKONYWANIA PRAWA MAJĄTKOWEGO")
-    miejsce_dokonania_czynnosci: Optional[int] = Field(None, alias="P22", description="MIEJSCE DOKONANIA CZYNNOŚCI CYWILNOPRAWNEJ")
-    okreslenie_czynnosci: str = Field(..., alias="P23", description="ZWIĘZŁE OKREŚLENIE TREŚCI I PRZEDMIOTU CZYNNOŚCI CYWILNOPRAWNEJ")
-    podstawa_opodatkowania: float = Field(..., alias="P26", description="PODSTAWA OPODATKOWANIA DLA UMOWY SPRZEDAŻY (w PLN, zaokrąglona do pełnych złotych)")
-    obliczony_nalezny_podatek: Optional[float] = Field(None, alias="P27", description="OBLICZONY NALEŻNY PODATEK OD UMOWY SPRZEDAŻY (w PLN, zaokrąglony do pełnych złotych)")
-    kwota_naleznego_podatku: Optional[float] = Field(None, alias="P46", description="KWOTA NALEŻNEGO PODATKU (w PLN, zaokrąglona do pełnych złotych)")
-    kwota_podatku_do_zaplaty: Optional[float] = Field(None, alias="P53", description="KWOTA PODATKU DO ZAPŁATY (w PLN, zaokrąglona do pełnych złotych)")
-    liczba_zalacznikow_pcc_3a: Optional[int] = Field(0, alias="P62", description="LICZBA DOŁĄCZONYCH ZAŁĄCZNIKÓW PCC-3/A")
+@dataclass
+class PCC3Declaration:
+    kod_urzedu_skarbowego: str = field(metadata={"id": "KodUrzedu"})
+    pesel: str = field(metadata={"id": "PESEL"})
+    imie_pierwsze: str = field(metadata={"id": "ImiePierwsze"})
+    nazwisko: str = field(metadata={"id": "Nazwisko"})
+    data_urodzenia: str = field(metadata={"id": "DataUrodzenia"})
+    wojewodztwo: str = field(metadata={"id": "Wojewodztwo"})
+    powiat: str = field(metadata={"id": "Powiat"})
+    gmina: str = field(metadata={"id": "Gmina"})
+    ulica: str = field(metadata={"id": "Ulica"})
+    nr_domu: str = field(metadata={"id": "NrDomu"})
+    nr_lokalu: str = field(metadata={"id": "NrLokalu"})
+    miejscowosc: str = field(metadata={"id": "Miejscowosc"})
+    kod_pocztowy: str = field(metadata={"id": "KodPocztowy"})
+    podmiot: int = field(metadata={"id": "P_7"})
+    przedmiot_opadatkowania: int = field(metadata={"id": "P_20"})
+    opis_sytuacji: str = field(metadata={"id": "P_23"})
+    podstawa_opodatkowania: int = field(metadata={"id": "P_24"})
+    obliczony_podatek_czynnosci: int = field(metadata={"id": "P_25"})
+    kwota_podatku: int = field(metadata={"id": "P_46"})
+    kwota_do_zaplaty: int = field(metadata={"id": "P_53"})
+    ilosc_zalocznikow: int = field(metadata={"id": "P_62"})
+
+    def get_remaining_fields(self):
+        unfilled_fields = []
+        for f in fields(self):
+            value = getattr(self, f.name)
+            if value is None:
+                unfilled_fields.append(f.metadata.get("id", f.name))
+        return unfilled_fields

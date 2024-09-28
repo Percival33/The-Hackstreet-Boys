@@ -4,7 +4,7 @@ from enum import StrEnum
 import pydantic
 
 from src.domain.action import ActionName, ALL_ACTIONS, Action
-
+from src.domain.pcc3_declaration import PCC3Declaration
 
 class MessageType(StrEnum):
     USER = "USER"
@@ -22,6 +22,7 @@ class Message(pydantic.BaseModel):
 class ConversationStatus(StrEnum):
     TRIAGE = "TRIAGE"
     FORM = "FORM"
+    GENERATION = "GENERATION"
 
 
 class ConversationId:
@@ -52,11 +53,13 @@ class Conversation:
             messages: list[Message] | None = None,
             available_actions: list[Action] | None = None,
             status: ConversationStatus | None = None,
+            form: PCC3Declaration | None = None
     ) -> None:
         self._conversation_id = conversation_id or ConversationId.generate()
         self._messages = messages or []
         self._available_actions = available_actions or ALL_ACTIONS.values()
         self._status = status or ConversationStatus.TRIAGE
+        self._pcc3_form = form or PCC3Declaration()
 
     @property
     def id(self) -> ConversationId:
@@ -73,6 +76,10 @@ class Conversation:
     @property
     def status(self) -> ConversationStatus:
         return self._status
+
+    @property
+    def form(self) -> PCC3Declaration:
+        return self._pcc3_form
 
     def append_message(self, message: Message) -> None:
         self._messages.append(message)
