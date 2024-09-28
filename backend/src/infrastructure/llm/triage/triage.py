@@ -73,13 +73,20 @@ class Triage:
         def conversation_response() -> TriageStepResponse:
             creator = GptPromptCreator()
             expert = DomainExpert(self.language)
+
+            last_message = conversation.messages[-1].text
+
+            chunks = expert.query_chroma(last_message, 5)
+
+            context_str = '\n\n'.join(chunks)
+
             creator.add_prebuilt(initial_messages)
             generation_settings = GptGenerationSettings(
                 response_format=TriageStepResponse
             )
             creator.add(
                 system=triage_step_response(self.language),
-                assistant=triage_step_response_system(actions_str)
+                assistant=triage_step_response_system(actions_str, context_str)
             )
             response = self.gpt_client.response(
                 messages=creator.messages,
