@@ -1,0 +1,110 @@
+[
+    {
+        "name": "P_7",
+        "required": true,
+        "nullable": false,
+        "description": "Podmiot składający deklarację",
+        "values": [
+            {
+                "value": "1",
+                "description": "Podmiot zobowiązany solidarnie do zapłaty podatku"
+            },
+            {
+                "value": "2",
+                "description": "Strona umowy zamiany"
+            },
+            {
+                "value": "3",
+                "description": "Wspólnik spółki cywilnej"
+            },
+            {
+                "value": "4",
+                "description": "Podmiot, o którym mowa w art. 9 pkt 10 lit. b ustawy (pożyczkobiorca)"
+            },
+            {
+                "value": "5",
+                "description": "Inny podmiot - różny od: podmiotu zobowiązanego solidarnie do zapłaty podatku, strony umowy zamiany, wspólnika spółki cywilnej"
+            }
+        ]
+    },
+    {
+        "name": "P_20",
+        "required": true,
+        "nullable": false,
+        "description": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne",
+        "values": [
+            {
+                "value": "1",
+                "description": "umowa"
+            },
+            {
+                "value": "2",
+                "description": "zmiana umowy"
+            },
+            {
+                "value": "3",
+                "description": "orzeczenie sądu lub ugoda"
+            },
+            {
+                "value": "4",
+                "description": "inne"
+            }
+        ]
+    },
+    {
+        "name": "P_21",
+        "required": false,
+        "nullable": false,
+        "description": "Miejsce położenia rzeczy lub miejsce wykonywania prawa majątkowego: 1 - terytorium RP, 2 - poza terytorium RP",
+        "values": [
+            {
+                "value": "1",
+                "description": "terytorium RP"
+            },
+            {
+                "value": "2",
+                "description": "poza terytorium RP"
+            }
+        ]
+    },
+    {
+        "name": "P_22",
+        "required": false,
+        "nullable": false,
+        "description": "Miejsce dokonania czynności cywilnoprawnej: 1 - terytorium RP, 2 - poza terytorium RP",
+        "values": [
+            {
+                "value": "1",
+                "description": "terytorium RP"
+            },
+            {
+                "value": "2",
+                "description": "poza terytorium RP"
+            }
+        ]
+    },
+    {
+        "name": "P_23",
+        "required": true,
+        "nullable": false,
+        "description": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"
+    },
+    {
+        "name": "P_46",
+        "required": false,
+        "nullable": false,
+        "description": "Kwota należnego podatku"
+    },
+    {
+        "name": "P_53",
+        "required": true,
+        "nullable": false,
+        "description": "Kwota podatku do zapłaty"
+    },
+    {
+        "name": "P_62",
+        "required": false,
+        "nullable": false,
+        "description": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"
+    }
+]
