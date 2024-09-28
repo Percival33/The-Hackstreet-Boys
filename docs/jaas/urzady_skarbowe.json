@@ -1,0 +1,1602 @@
+[
+  {
+    "description": "URZĄD SKARBOWY W BOLESŁAWCU",
+    "value": "0202"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BYSTRZYCY KŁODZKIEJ",
+    "value": "0203"
+  },
+  {
+    "description": "URZĄD SKARBOWY W DZIERŻONIOWIE",
+    "value": "0204"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GŁOGOWIE",
+    "value": "0205"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JAWORZE",
+    "value": "0206"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JELENIEJ GÓRZE",
+    "value": "0207"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KAMIENNEJ GÓRZE",
+    "value": "0208"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KŁODZKU",
+    "value": "0209"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LEGNICY",
+    "value": "0210"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LUBANIU",
+    "value": "0211"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LUBINIE",
+    "value": "0212"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LWÓWKU ŚLĄSKIM",
+    "value": "0213"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MILICZU",
+    "value": "0214"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NOWEJ RUDZIE",
+    "value": "0215"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OLEŚNICY",
+    "value": "0216"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OŁAWIE",
+    "value": "0217"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STRZELINIE",
+    "value": "0218"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŚRODZIE ŚLĄSKIEJ",
+    "value": "0219"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŚWIDNICY",
+    "value": "0220"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TRZEBNICY",
+    "value": "0221"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WAŁBRZYCHU",
+    "value": "0222"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WOŁOWIE",
+    "value": "0223"
+  },
+  {
+    "description": "URZĄD SKARBOWY WROCŁAW-FABRYCZNA",
+    "value": "0224"
+  },
+  {
+    "description": "URZĄD SKARBOWY WROCŁAW-KRZYKI",
+    "value": "0225"
+  },
+  {
+    "description": "URZĄD SKARBOWY WROCŁAW-PSIE POLE",
+    "value": "0226"
+  },
+  {
+    "description": "URZĄD SKARBOWY WROCŁAW-STARE MIASTO",
+    "value": "0227"
+  },
+  {
+    "description": "URZĄD SKARBOWY WROCŁAW-ŚRÓDMIEŚCIE",
+    "value": "0228"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY WE WROCŁAWIU",
+    "value": "0229"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZĄBKOWICACH ŚLĄSKICH",
+    "value": "0230"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZGORZELCU",
+    "value": "0231"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZŁOTORYI",
+    "value": "0232"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GÓRZE",
+    "value": "0233"
+  },
+  {
+    "description": "URZĄD SKARBOWY W POLKOWICACH",
+    "value": "0234"
+  },
+  {
+    "description": "DOLNOŚLĄSKI URZĄD SKARBOWY WE WROCŁAWIU",
+    "value": "0271"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ALEKSANDROWIE KUJAWSKIM",
+    "value": "0402"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BRODNICY",
+    "value": "0403"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W BYDGOSZCZY",
+    "value": "0404"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W BYDGOSZCZY",
+    "value": "0405"
+  },
+  {
+    "description": "TRZECI URZĄD SKARBOWY W BYDGOSZCZY",
+    "value": "0406"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CHEŁMNIE",
+    "value": "0407"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GRUDZIĄDZU",
+    "value": "0408"
+  },
+  {
+    "description": "URZĄD SKARBOWY W INOWROCŁAWIU",
+    "value": "0409"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LIPNIE",
+    "value": "0410"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MOGILNIE",
+    "value": "0411"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NAKLE NAD NOTECIĄ",
+    "value": "0412"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RADZIEJOWIE",
+    "value": "0413"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RYPINIE",
+    "value": "0414"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŚWIECIU",
+    "value": "0415"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W TORUNIU",
+    "value": "0416"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W TORUNIU",
+    "value": "0417"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TUCHOLI",
+    "value": "0418"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WĄBRZEŹNIE",
+    "value": "0419"
+  },
+  {
+    "description": "URZĄD SKARBOWY WE WŁOCŁAWKU",
+    "value": "0420"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŻNINIE",
+    "value": "0421"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GOLUBIU-DOBRZYNIU",
+    "value": "0422"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SĘPÓLNIE KRAJEŃSKIM",
+    "value": "0423"
+  },
+  {
+    "description": "KUJAWSKO-POMORSKI URZĄD SKARBOWY W BYDGOSZCZY",
+    "value": "0471"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BIAŁEJ PODLASKIEJ",
+    "value": "0602"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BIŁGORAJU",
+    "value": "0603"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CHEŁMIE",
+    "value": "0604"
+  },
+  {
+    "description": "URZĄD SKARBOWY W HRUBIESZOWIE",
+    "value": "0605"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JANOWIE LUBELSKIM",
+    "value": "0606"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KRASNYMSTAWIE",
+    "value": "0607"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KRAŚNIKU",
+    "value": "0608"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LUBARTOWIE",
+    "value": "0609"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W LUBLINIE",
+    "value": "0610"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W LUBLINIE",
+    "value": "0611"
+  },
+  {
+    "description": "TRZECI URZĄD SKARBOWY W LUBLINIE",
+    "value": "0612"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁUKOWIE",
+    "value": "0613"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OPOLU LUBELSKIM",
+    "value": "0614"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PARCZEWIE",
+    "value": "0615"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PUŁAWACH",
+    "value": "0616"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RADZYNIU PODLASKIM",
+    "value": "0617"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TOMASZOWIE LUBELSKIM",
+    "value": "0618"
+  },
+  {
+    "description": "URZĄD SKARBOWY WE WŁODAWIE",
+    "value": "0619"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZAMOŚCIU",
+    "value": "0620"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁĘCZNEJ",
+    "value": "0621"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RYKACH",
+    "value": "0622"
+  },
+  {
+    "description": "LUBELSKI URZĄD SKARBOWY W LUBLINIE",
+    "value": "0671"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GORZOWIE WIELKOPOLSKIM",
+    "value": "0802"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KROŚNIE ODRZAŃSKIM",
+    "value": "0803"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MIĘDZYRZECZU",
+    "value": "0804"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NOWEJ SOLI",
+    "value": "0805"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SŁUBICACH",
+    "value": "0806"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŚWIEBODZINIE",
+    "value": "0807"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W ZIELONEJ GÓRZE",
+    "value": "0808"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W ZIELONEJ GÓRZE",
+    "value": "0809"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŻAGANIU",
+    "value": "0810"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŻARACH",
+    "value": "0811"
+  },
+  {
+    "description": "URZĄD SKARBOWY W DREZDENKU",
+    "value": "0812"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SULĘCINIE",
+    "value": "0813"
+  },
+  {
+    "description": "URZĄD SKARBOWY WE WSCHOWIE",
+    "value": "0814"
+  },
+  {
+    "description": "LUBUSKI URZĄD SKARBOWY W ZIELONEJ GÓRZE",
+    "value": "0871"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BEŁCHATOWIE",
+    "value": "1002"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BRZEZINACH",
+    "value": "1003"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GŁOWNIE",
+    "value": "1004"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KUTNIE",
+    "value": "1005"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁASKU",
+    "value": "1006"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁOWICZU",
+    "value": "1007"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY ŁÓDŹ-BAŁUTY",
+    "value": "1008"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY ŁÓDŹ-BAŁUTY",
+    "value": "1009"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY ŁÓDŹ-GÓRNA",
+    "value": "1010"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY ŁÓDŹ-GÓRNA",
+    "value": "1011"
+  },
+  {
+    "description": "URZĄD SKARBOWY ŁÓDŹ-POLESIE",
+    "value": "1012"
+  },
+  {
+    "description": "URZĄD SKARBOWY ŁÓDŹ-ŚRÓDMIEŚCIE",
+    "value": "1013"
+  },
+  {
+    "description": "URZĄD SKARBOWY ŁÓDŹ-WIDZEW",
+    "value": "1014"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OPOCZNIE",
+    "value": "1015"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PABIANICACH",
+    "value": "1016"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PIOTRKOWIE TRYBUNALSKIM",
+    "value": "1017"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PODDĘBICACH",
+    "value": "1018"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RADOMSKU",
+    "value": "1019"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RAWIE MAZOWIECKIEJ",
+    "value": "1020"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SIERADZU",
+    "value": "1021"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SKIERNIEWICACH",
+    "value": "1022"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TOMASZOWIE MAZOWIECKIM",
+    "value": "1023"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WIELUNIU",
+    "value": "1024"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZDUŃSKIEJ WOLI",
+    "value": "1025"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZGIERZU",
+    "value": "1026"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WIERUSZOWIE",
+    "value": "1027"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁĘCZYCY",
+    "value": "1028"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PAJĘCZNIE",
+    "value": "1029"
+  },
+  {
+    "description": "ŁÓDZKI URZĄD SKARBOWY W ŁODZI",
+    "value": "1071"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BOCHNI",
+    "value": "1202"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BRZESKU",
+    "value": "1203"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CHRZANOWIE",
+    "value": "1204"
+  },
+  {
+    "description": "URZĄD SKARBOWY W DĄBROWIE TARNOWSKIEJ",
+    "value": "1205"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GORLICACH",
+    "value": "1206"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY KRAKÓW",
+    "value": "1207"
+  },
+  {
+    "description": "URZĄD SKARBOWY KRAKÓW-KROWODRZA",
+    "value": "1208"
+  },
+  {
+    "description": "URZĄD SKARBOWY KRAKÓW-NOWA HUTA",
+    "value": "1209"
+  },
+  {
+    "description": "URZĄD SKARBOWY KRAKÓW-PODGÓRZE",
+    "value": "1210"
+  },
+  {
+    "description": "URZĄD SKARBOWY KRAKÓW-PRĄDNIK",
+    "value": "1211"
+  },
+  {
+    "description": "URZĄD SKARBOWY KRAKÓW-STARE MIASTO",
+    "value": "1212"
+  },
+  {
+    "description": "URZĄD SKARBOWY KRAKÓW-ŚRÓDMIEŚCIE",
+    "value": "1213"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LIMANOWEJ",
+    "value": "1214"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MIECHOWIE",
+    "value": "1215"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MYŚLENICACH",
+    "value": "1216"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NOWYM SĄCZU",
+    "value": "1217"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NOWYM TARGU",
+    "value": "1218"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OLKUSZU",
+    "value": "1219"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OŚWIĘCIMIU",
+    "value": "1220"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PROSZOWICACH",
+    "value": "1221"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SUCHEJ BESKIDZKIEJ",
+    "value": "1222"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W TARNOWIE",
+    "value": "1223"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W TARNOWIE",
+    "value": "1224"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WADOWICACH",
+    "value": "1225"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WIELICZCE",
+    "value": "1226"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZAKOPANEM",
+    "value": "1227"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY KRAKÓW",
+    "value": "1228"
+  },
+  {
+    "description": "MAŁOPOLSKI URZĄD SKARBOWY W KRAKOWIE",
+    "value": "1271"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BIAŁOBRZEGACH",
+    "value": "1402"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CIECHANOWIE",
+    "value": "1403"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GARWOLINIE",
+    "value": "1404"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GOSTYNINIE",
+    "value": "1405"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GRODZISKU MAZOWIECKIM",
+    "value": "1406"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GRÓJCU",
+    "value": "1407"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOZIENICACH",
+    "value": "1408"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LEGIONOWIE",
+    "value": "1409"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁOSICACH",
+    "value": "1410"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MAKOWIE MAZOWIECKIM",
+    "value": "1411"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MIŃSKU MAZOWIECKIM",
+    "value": "1412"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MŁAWIE",
+    "value": "1413"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NOWYM DWORZE MAZOWIECKIM",
+    "value": "1414"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OSTROŁĘCE",
+    "value": "1415"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OSTROWI MAZOWIECKIEJ",
+    "value": "1416"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OTWOCKU",
+    "value": "1417"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PIASECZNIE",
+    "value": "1418"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PŁOCKU",
+    "value": "1419"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PŁOŃSKU",
+    "value": "1420"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PRUSZKOWIE",
+    "value": "1421"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PRZASNYSZU",
+    "value": "1422"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PUŁTUSKU",
+    "value": "1423"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W RADOMIU",
+    "value": "1424"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W RADOMIU",
+    "value": "1425"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SIEDLCACH",
+    "value": "1426"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SIERPCU",
+    "value": "1427"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SOCHACZEWIE",
+    "value": "1428"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SOKOŁOWIE PODLASKIM",
+    "value": "1429"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SZYDŁOWCU",
+    "value": "1430"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-BEMOWO",
+    "value": "1431"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-BIELANY",
+    "value": "1432"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-MOKOTÓW",
+    "value": "1433"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-PRAGA",
+    "value": "1434"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY WARSZAWA-ŚRÓDMIEŚCIE",
+    "value": "1435"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY WARSZAWA-ŚRÓDMIEŚCIE",
+    "value": "1436"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-TARGÓWEK",
+    "value": "1437"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-URSYNÓW",
+    "value": "1438"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-WAWER",
+    "value": "1439"
+  },
+  {
+    "description": "URZĄD SKARBOWY WARSZAWA-WOLA",
+    "value": "1440"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WĘGROWIE",
+    "value": "1441"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WOŁOMINIE",
+    "value": "1442"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WYSZKOWIE",
+    "value": "1443"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZWOLENIU",
+    "value": "1444"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŻUROMINIE",
+    "value": "1445"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŻYRARDOWIE",
+    "value": "1446"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LIPSKU",
+    "value": "1447"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PRZYSUSZE",
+    "value": "1448"
+  },
+  {
+    "description": "TRZECI URZĄD SKARBOWY WARSZAWA-ŚRÓDMIEŚCIE",
+    "value": "1449"
+  },
+  {
+    "description": "PIERWSZY MAZOWIECKI URZĄD SKARBOWY W WARSZAWIE",
+    "value": "1471"
+  },
+  {
+    "description": "DRUGI MAZOWIECKI URZĄD SKARBOWY W WARSZAWIE",
+    "value": "1472"
+  },
+  {
+    "description": "TRZECI MAZOWIECKI URZĄD SKARBOWY W RADOMIU",
+    "value": "1473"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BRZEGU",
+    "value": "1602"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GŁUBCZYCACH",
+    "value": "1603"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KĘDZIERZYNIE-KOŹLU",
+    "value": "1604"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KLUCZBORKU",
+    "value": "1605"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NAMYSŁOWIE",
+    "value": "1606"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NYSIE",
+    "value": "1607"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OLEŚNIE",
+    "value": "1608"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W OPOLU",
+    "value": "1609"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W OPOLU",
+    "value": "1610"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PRUDNIKU",
+    "value": "1611"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STRZELCACH OPOLSKICH",
+    "value": "1612"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KRAPKOWICACH",
+    "value": "1613"
+  },
+  {
+    "description": "OPOLSKI URZĄD SKARBOWY W OPOLU",
+    "value": "1671"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BRZOZOWIE",
+    "value": "1802"
+  },
+  {
+    "description": "URZĄD SKARBOWY W DĘBICY",
+    "value": "1803"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JAROSŁAWIU",
+    "value": "1804"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JAŚLE",
+    "value": "1805"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOLBUSZOWEJ",
+    "value": "1806"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KROŚNIE",
+    "value": "1807"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LESKU",
+    "value": "1808"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LEŻAJSKU",
+    "value": "1809"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LUBACZOWIE",
+    "value": "1810"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁAŃCUCIE",
+    "value": "1811"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MIELCU",
+    "value": "1812"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PRZEMYŚLU",
+    "value": "1813"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PRZEWORSKU",
+    "value": "1814"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ROPCZYCACH",
+    "value": "1815"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W RZESZOWIE",
+    "value": "1816"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SANOKU",
+    "value": "1817"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STALOWEJ WOLI",
+    "value": "1818"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STRZYŻOWIE",
+    "value": "1819"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TARNOBRZEGU",
+    "value": "1820"
+  },
+  {
+    "description": "URZĄD SKARBOWY W USTRZYKACH DOLNYCH",
+    "value": "1821"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W RZESZOWIE",
+    "value": "1822"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NISKU",
+    "value": "1823"
+  },
+  {
+    "description": "PODKARPACKI URZĄD SKARBOWY W RZESZOWIE",
+    "value": "1871"
+  },
+  {
+    "description": "URZĄD SKARBOWY W AUGUSTOWIE",
+    "value": "2002"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W BIAŁYMSTOKU",
+    "value": "2003"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W BIAŁYMSTOKU",
+    "value": "2004"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BIELSKU PODLASKIM",
+    "value": "2005"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GRAJEWIE",
+    "value": "2006"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOLNIE",
+    "value": "2007"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŁOMŻY",
+    "value": "2008"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MOŃKACH",
+    "value": "2009"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SIEMIATYCZACH",
+    "value": "2010"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SOKÓŁCE",
+    "value": "2011"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SUWAŁKACH",
+    "value": "2012"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WYSOKIEM MAZOWIECKIEM",
+    "value": "2013"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZAMBROWIE",
+    "value": "2014"
+  },
+  {
+    "description": "URZĄD SKARBOWY W HAJNÓWCE",
+    "value": "2015"
+  },
+  {
+    "description": "PODLASKI URZĄD SKARBOWY W BIAŁYMSTOKU",
+    "value": "2071"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BYTOWIE",
+    "value": "2202"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CHOJNICACH",
+    "value": "2203"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CZŁUCHOWIE",
+    "value": "2204"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W GDAŃSKU",
+    "value": "2205"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W GDAŃSKU",
+    "value": "2206"
+  },
+  {
+    "description": "TRZECI URZĄD SKARBOWY W GDAŃSKU",
+    "value": "2207"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W GDYNI",
+    "value": "2208"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W GDYNI",
+    "value": "2209"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KARTUZACH",
+    "value": "2210"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOŚCIERZYNIE",
+    "value": "2211"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KWIDZYNIE",
+    "value": "2212"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LĘBORKU",
+    "value": "2213"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MALBORKU",
+    "value": "2214"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PUCKU",
+    "value": "2215"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SŁUPSKU",
+    "value": "2216"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SOPOCIE",
+    "value": "2217"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STAROGARDZIE GDAŃSKIM",
+    "value": "2218"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TCZEWIE",
+    "value": "2219"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WEJHEROWIE",
+    "value": "2220"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PRUSZCZU GDAŃSKIM",
+    "value": "2221"
+  },
+  {
+    "description": "POMORSKI URZĄD SKARBOWY W GDAŃSKU",
+    "value": "2271"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BĘDZINIE",
+    "value": "2402"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W BIELSKU-BIAŁEJ",
+    "value": "2403"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W BIELSKU-BIAŁEJ",
+    "value": "2404"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BYTOMIU",
+    "value": "2405"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CHORZOWIE",
+    "value": "2406"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CIESZYNIE",
+    "value": "2407"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CZECHOWICACH-DZIEDZICACH",
+    "value": "2408"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W CZĘSTOCHOWIE",
+    "value": "2409"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W CZĘSTOCHOWIE",
+    "value": "2410"
+  },
+  {
+    "description": "URZĄD SKARBOWY W DĄBROWIE GÓRNICZEJ",
+    "value": "2411"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W GLIWICACH",
+    "value": "2412"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W GLIWICACH",
+    "value": "2413"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JASTRZĘBIU-ZDROJU",
+    "value": "2414"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JAWORZNIE",
+    "value": "2415"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W KATOWICACH",
+    "value": "2416"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W KATOWICACH",
+    "value": "2417"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KŁOBUCKU",
+    "value": "2418"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LUBLIŃCU",
+    "value": "2419"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MIKOŁOWIE",
+    "value": "2420"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MYSŁOWICACH",
+    "value": "2421"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MYSZKOWIE",
+    "value": "2422"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PIEKARACH ŚLĄSKICH",
+    "value": "2423"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PSZCZYNIE",
+    "value": "2424"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RACIBORZU",
+    "value": "2425"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RUDZIE ŚLĄSKIEJ",
+    "value": "2426"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RYBNIKU",
+    "value": "2427"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SIEMIANOWICACH ŚLĄSKICH",
+    "value": "2428"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SOSNOWCU",
+    "value": "2429"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TARNOWSKICH GÓRACH",
+    "value": "2430"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TYCHACH",
+    "value": "2431"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WODZISŁAWIU ŚLĄSKIM",
+    "value": "2432"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZABRZU",
+    "value": "2433"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZAWIERCIU",
+    "value": "2434"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŻORACH",
+    "value": "2435"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŻYWCU",
+    "value": "2436"
+  },
+  {
+    "description": "PIERWSZY ŚLĄSKI URZĄD SKARBOWY W SOSNOWCU",
+    "value": "2471"
+  },
+  {
+    "description": "DRUGI ŚLĄSKI URZĄD SKARBOWY W BIELSKU-BIAŁEJ",
+    "value": "2472"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BUSKU-ZDROJU",
+    "value": "2602"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JĘDRZEJOWIE",
+    "value": "2603"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W KIELCACH",
+    "value": "2604"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W KIELCACH",
+    "value": "2605"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOŃSKICH",
+    "value": "2606"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OPATOWIE",
+    "value": "2607"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OSTROWCU ŚWIĘTOKRZYSKIM",
+    "value": "2608"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PIŃCZOWIE",
+    "value": "2609"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SANDOMIERZU",
+    "value": "2610"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SKARŻYSKU-KAMIENNEJ",
+    "value": "2611"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STARACHOWICACH",
+    "value": "2612"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STASZOWIE",
+    "value": "2613"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KAZIMIERZY WIELKIEJ",
+    "value": "2614"
+  },
+  {
+    "description": "URZĄD SKARBOWY WE WŁOSZCZOWIE",
+    "value": "2615"
+  },
+  {
+    "description": "ŚWIĘTOKRZYSKI URZĄD SKARBOWY W KIELCACH",
+    "value": "2671"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BARTOSZYCACH",
+    "value": "2802"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BRANIEWIE",
+    "value": "2803"
+  },
+  {
+    "description": "URZĄD SKARBOWY W DZIAŁDOWIE",
+    "value": "2804"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ELBLĄGU",
+    "value": "2805"
+  },
+  {
+    "description": "URZĄD SKARBOWY W EŁKU",
+    "value": "2806"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GIŻYCKU",
+    "value": "2807"
+  },
+  {
+    "description": "URZĄD SKARBOWY W IŁAWIE",
+    "value": "2808"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KĘTRZYNIE",
+    "value": "2809"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NIDZICY",
+    "value": "2810"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NOWYM MIEŚCIE LUBAWSKIM",
+    "value": "2811"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OLECKU",
+    "value": "2812"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OLSZTYNIE",
+    "value": "2813"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OSTRÓDZIE",
+    "value": "2814"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PISZU",
+    "value": "2815"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SZCZYTNIE",
+    "value": "2816"
+  },
+  {
+    "description": "WARMIŃSKO-MAZURSKI URZĄD SKARBOWY W OLSZTYNIE",
+    "value": "2871"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CZARNKOWIE",
+    "value": "3002"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GNIEŹNIE",
+    "value": "3003"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GOSTYNIU",
+    "value": "3004"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GRODZISKU WIELKOPOLSKIM",
+    "value": "3005"
+  },
+  {
+    "description": "URZĄD SKARBOWY W JAROCINIE",
+    "value": "3006"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W KALISZU",
+    "value": "3007"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W KALISZU",
+    "value": "3008"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KĘPNIE",
+    "value": "3009"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOLE",
+    "value": "3010"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KONINIE",
+    "value": "3011"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOŚCIANIE",
+    "value": "3012"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KROTOSZYNIE",
+    "value": "3013"
+  },
+  {
+    "description": "URZĄD SKARBOWY W LESZNIE",
+    "value": "3014"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MIĘDZYCHODZIE",
+    "value": "3015"
+  },
+  {
+    "description": "URZĄD SKARBOWY W NOWYM TOMYŚLU",
+    "value": "3016"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OSTROWIE WIELKOPOLSKIM",
+    "value": "3017"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OSTRZESZOWIE",
+    "value": "3018"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PILE",
+    "value": "3019"
+  },
+  {
+    "description": "URZĄD SKARBOWY POZNAŃ-GRUNWALD",
+    "value": "3020"
+  },
+  {
+    "description": "URZĄD SKARBOWY POZNAŃ-JEŻYCE",
+    "value": "3021"
+  },
+  {
+    "description": "URZĄD SKARBOWY POZNAŃ-NOWE MIASTO",
+    "value": "3022"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W POZNANIU",
+    "value": "3023"
+  },
+  {
+    "description": "URZĄD SKARBOWY POZNAŃ-WINOGRADY",
+    "value": "3025"
+  },
+  {
+    "description": "URZĄD SKARBOWY POZNAŃ-WILDA",
+    "value": "3026"
+  },
+  {
+    "description": "URZĄD SKARBOWY W RAWICZU",
+    "value": "3027"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SŁUPCY",
+    "value": "3028"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SZAMOTUŁACH",
+    "value": "3029"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŚREMIE",
+    "value": "3030"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŚRODZIE WIELKOPOLSKIEJ",
+    "value": "3031"
+  },
+  {
+    "description": "URZĄD SKARBOWY W TURKU",
+    "value": "3032"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WĄGROWCU",
+    "value": "3033"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WOLSZTYNIE",
+    "value": "3034"
+  },
+  {
+    "description": "URZĄD SKARBOWY WE WRZEŚNI",
+    "value": "3035"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ZŁOTOWIE",
+    "value": "3036"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CHODZIEŻY",
+    "value": "3037"
+  },
+  {
+    "description": "URZĄD SKARBOWY W OBORNIKACH",
+    "value": "3038"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PLESZEWIE",
+    "value": "3039"
+  },
+  {
+    "description": "PIERWSZY WIELKOPOLSKI URZĄD SKARBOWY W POZNANIU",
+    "value": "3071"
+  },
+  {
+    "description": "DRUGI WIELKOPOLSKI URZĄD SKARBOWY W KALISZU",
+    "value": "3072"
+  },
+  {
+    "description": "URZĄD SKARBOWY W BIAŁOGARDZIE",
+    "value": "3202"
+  },
+  {
+    "description": "URZĄD SKARBOWY W CHOSZCZNIE",
+    "value": "3203"
+  },
+  {
+    "description": "URZĄD SKARBOWY W DRAWSKU POMORSKIM",
+    "value": "3204"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GOLENIOWIE",
+    "value": "3205"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GRYFICACH",
+    "value": "3206"
+  },
+  {
+    "description": "URZĄD SKARBOWY W GRYFINIE",
+    "value": "3207"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KAMIENIU POMORSKIM",
+    "value": "3208"
+  },
+  {
+    "description": "URZĄD SKARBOWY W KOŁOBRZEGU",
+    "value": "3209"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W KOSZALINIE",
+    "value": "3210"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W KOSZALINIE",
+    "value": "3211"
+  },
+  {
+    "description": "URZĄD SKARBOWY W MYŚLIBORZU",
+    "value": "3212"
+  },
+  {
+    "description": "URZĄD SKARBOWY W PYRZYCACH",
+    "value": "3213"
+  },
+  {
+    "description": "URZĄD SKARBOWY W STARGARDZIE",
+    "value": "3214"
+  },
+  {
+    "description": "PIERWSZY URZĄD SKARBOWY W SZCZECINIE",
+    "value": "3215"
+  },
+  {
+    "description": "DRUGI URZĄD SKARBOWY W SZCZECINIE",
+    "value": "3216"
+  },
+  {
+    "description": "TRZECI URZĄD SKARBOWY W SZCZECINIE",
+    "value": "3217"
+  },
+  {
+    "description": "URZĄD SKARBOWY W SZCZECINKU",
+    "value": "3218"
+  },
+  {
+    "description": "URZĄD SKARBOWY W ŚWINOUJŚCIU",
+    "value": "3219"
+  },
+  {
+    "description": "URZĄD SKARBOWY W WAŁCZU",
+    "value": "3220"
+  },
+  {
+    "description": "ZACHODNIOPOMORSKI URZĄD SKARBOWY W SZCZECINIE",
+    "value": "3271"
+  }
+]
