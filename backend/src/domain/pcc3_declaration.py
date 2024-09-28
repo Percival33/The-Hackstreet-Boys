@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field, fields
 
+@dataclass
+class RemainingField:
+    name: str
+    description: str
 
 @dataclass
 class PCC3Declaration:
@@ -25,10 +29,11 @@ class PCC3Declaration:
     kwota_do_zaplaty: int | None = field(metadata={"id": "P_53"}, default=None)
     ilosc_zalocznikow: int | None = field(metadata={"id": "P_62"}, default=None)
 
-    def get_remaining_fields(self):
+    def get_remaining_fields(self) -> list[RemainingField]:
         unfilled_fields = []
         for f in fields(self):
             value = getattr(self, f.name)
             if value is None:
-                unfilled_fields.append(f.metadata.get("id", f.name))
+                _id = f.metadata.get("id", f.name)
+                unfilled_fields.append(RemainingField(_id, "test description"))
         return unfilled_fields
