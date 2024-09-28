@@ -5,25 +5,14 @@ from pydantic import BaseModel
 
 from src.application.generation_settings import GptGenerationSettings
 from src.domain.action import ActionName, ALL_ACTIONS
-from src.domain.conversation import Conversation, MessageChoice, Message
+from src.domain.conversation import Conversation, Message
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.triage.prompts import triage_step, triage_step_system
 
 
-class Action(BaseModel):
-    name: str
-    description: str
-    tool: str
-
-
 class TriageModelResponse(BaseModel):
-    available_actions: list[MessageChoice]
-    response: str
-    rollback: bool
-
-
-class TriageStepResponse(BaseModel):
-    available_choices: list[MessageChoice]
+    available_actions: list[ActionName]
+    available_choices: list[str]
     response: str
 
 
@@ -39,7 +28,7 @@ class Triage:
             self,
             conversation: Conversation,
             depth: int = 0
-    ) -> TriageStepResponse:
+    ) -> TriageModelResponse:
         self.gpt_client.creator.add_from_conversation(conversation.messages)
         if len(conversation.messages) > 1:
             current_actions = conversation.messages[-2].choices
@@ -66,24 +55,21 @@ class Triage:
         )
         self.gpt_client.creator.clear()
         response = json.loads(response)
-        response = TriageModelResponse(**response)
-        if response.rollback:
-            self.__rollback()
-        else:
-            response = TriageStepResponse(**response.model_dump())
-            return response
+        return TriageModelResponse(**response)
 
-    @staticmethod
-    def __parse_actions(actions: list[MessageChoice] | None) -> str:
-        if actions is None:
-            return ''
-        res = ''
-        for i, action_choice in enumerate(actions):
-            action = ALL_ACTIONS[action_choice.action_name]
-            res += f'{i + 1}. {action.name.value}\n'
-            res += f'{action.description}\n'
-            res += f'-----------------------\n'
-        return res
+
+
+    # @staticmethod
+    # def __parse_actions(actions: list[str] | None) -> str:
+    #     if actions is None:
+    #         return ''
+    #     res = ''
+    #     for i, action_choice in enumerate(actions):
+    #         action = ALL_ACTIONS[action_choice.action_name]
+    #         res += f'{i + 1}. {action.name.value}\n'
+    #         res += f'{action.description}\n'
+    #         res += f'-----------------------\n'
+    #     return res
 
     def __rollback(self):
         pass
