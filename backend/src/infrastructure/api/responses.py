@@ -20,6 +20,7 @@ class MessageResponse(BaseResponse):
 class ConversationResponse(BaseResponse):
     conversation_id: str
     messages: list[MessageResponse]
+    form: dict
 
     @classmethod
     def from_conversation(cls, conversation: Conversation) -> "ConversationResponse":
