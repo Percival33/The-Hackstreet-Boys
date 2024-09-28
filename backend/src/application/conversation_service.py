@@ -2,14 +2,12 @@ from dataclasses import dataclass
 
 from src.application.conversation_repository import ConversationRepository
 from src.domain.conversation import Conversation, Message, MessageType, ConversationStatus
+from src.domain.pcc3_declaration import RemainingField
 from src.infrastructure.llm.forms.forms import FormsModel
 from src.infrastructure.llm.triage.triage import Triage
 from src.application.form_serializer import FormSerializer
 
-@dataclass
-class RemainingField:
-    name: str
-    description: str
+
 
 
 class ConversationService:
