@@ -1,6 +1,9 @@
 import uuid
-from dataclasses import dataclass
 from enum import Enum
+
+import pydantic
+
+from src.domain.action import Action, ActionName, ALL_ACTIONS
 
 
 class MessageType(str, Enum):
@@ -8,8 +11,7 @@ class MessageType(str, Enum):
     SYSTEM = "SYSTEM"
 
 
-@dataclass(frozen=True)
-class Message:
+class Message(pydantic.BaseModel):
     type: MessageType
     text: str
     choices: list[str] | None = None
@@ -44,9 +46,15 @@ class ConversationId:
 
 
 class Conversation:
-    def __init__(self, conversation_id: ConversationId | None = None, messages: list[Message] | None = None) -> None:
+    def __init__(
+            self,
+            conversation_id: ConversationId | None = None,
+            messages: list[Message] | None = None,
+            available_actions: list[Action] | None = None,
+    ) -> None:
         self._conversation_id = conversation_id or ConversationId.generate()
         self._messages = messages or []
+        self._available_actions = available_actions or ALL_ACTIONS
 
     @property
     def id(self) -> ConversationId:
@@ -55,6 +63,10 @@ class Conversation:
     @property
     def messages(self) -> list[Message]:
         return self._messages
+
+    @property
+    def available_actions(self) -> list[ActionName]:
+        return self._available_actions
 
     def append_message(self, message: Message) -> None:
         self._messages.append(message)
@@ -69,5 +81,6 @@ class Conversation:
     def __dict__(self) -> dict:
         return {
             "conversation_id": self.id.value,
-            "messages": [msg.__dict__() for msg in self._messages]
+            "messages": [msg.__dict__() for msg in self._messages],
+            "available_actions": [str(action) for action in self._available_actions],
         }
