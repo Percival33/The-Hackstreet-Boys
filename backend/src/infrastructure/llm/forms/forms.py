@@ -4,6 +4,7 @@ from typing import Union
 from pydantic import BaseModel
 
 from src.application.generation_settings import GptGenerationSettings
+from src.domain.conversation import Conversation
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.forms.prompts import forms_process_response, forms_ask_question
 
@@ -23,12 +24,11 @@ class ProcessingSchema(BaseModel):
 
 
 class FormsModel:
-    def __init__(self, conversation_history: list[str], language: str):
-        self.conversation_history = conversation_history
+    def __init__(self,  language: str):
         self.gpt_client = GptClient()
         self.language = language
 
-    def initialize_form(self, schema: dict):
+    def initialize_form(self, conversation: Conversation):
         pass
 
     def ask_question(self, schema: dict):
@@ -36,7 +36,7 @@ class FormsModel:
             response_format=AskQuestionSchema
         )
         self.gpt_client.creator.add(
-            user=self.conversation_history,
+            user=None,
             assistant=forms_ask_question(self.language),
             system=str(schema)
         )

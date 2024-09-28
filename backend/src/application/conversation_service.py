@@ -1,6 +1,15 @@
+from dataclasses import dataclass
+
 from src.application.conversation_repository import ConversationRepository
 from src.domain.conversation import Conversation, Message, MessageType, ConversationStatus
+from src.infrastructure.llm.forms.forms import FormsModel
 from src.infrastructure.llm.triage.triage import Triage
+
+
+@dataclass
+class RemainingField:
+    name: str
+    description: str
 
 
 class ConversationService:
@@ -8,9 +17,11 @@ class ConversationService:
         self,
         conversations_repo: ConversationRepository,
         triage_service: Triage,
+        forms_model: FormsModel,
     ):
         self._repo = conversations_repo
         self._triage_service = triage_service
+        self._forms_model = forms_model
 
     def process(self, conversation: Conversation) -> None:
         if conversation.status == ConversationStatus.FORM:
@@ -19,7 +30,10 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation) -> None:
-        pass
+
+        # form_gpt_service.ask_about_fields(form.remaining_fields())
+        # mapping
+        remaining_fields: list[RemainingField] = []
 
     def _process_triage(self, conversation: Conversation) -> None:
         result = self._triage_service.step(conversation)
@@ -38,5 +52,8 @@ class ConversationService:
                 action_to_perform=action_to_perform
             )
         )
+
+        if action_to_perform is not None:
+            self._forms_model.initialize_form(conversation)
 
         self._repo.save(conversation)
