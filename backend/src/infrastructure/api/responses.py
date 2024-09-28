@@ -1,3 +1,5 @@
+import dataclasses
+
 from pydantic import BaseModel
 
 from src.domain.action import ALL_ACTIONS
@@ -18,6 +20,7 @@ class MessageResponse(BaseResponse):
 class ConversationResponse(BaseResponse):
     conversation_id: str
     messages: list[MessageResponse]
+    form: dict
 
     @classmethod
     def from_conversation(cls, conversation: Conversation) -> "ConversationResponse":
@@ -35,4 +38,5 @@ class ConversationResponse(BaseResponse):
                     } if message.action_to_perform else None,
                 ) for message in conversation.messages
             ],
+            form=dataclasses.asdict(conversation.form),
         )
