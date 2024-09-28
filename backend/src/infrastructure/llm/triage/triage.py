@@ -1,9 +1,13 @@
+import json
+from typing import Tuple
+
 from pydantic import BaseModel
 
 from src.application.generation_settings import GptGenerationSettings
-from src.domain.conversation import Conversation
+from src.domain.action import ActionName, ALL_ACTIONS
+from src.domain.conversation import Conversation, MessageChoice, Message
 from src.infrastructure.llm.forms.gpt_client import GptClient
-from src.infrastructure.llm.triage.prompts import triage_step
+from src.infrastructure.llm.triage.prompts import triage_step, triage_step_system
 
 
 class Action(BaseModel):
@@ -12,57 +16,74 @@ class Action(BaseModel):
     tool: str
 
 
-class TriageActionResponse(BaseModel):
-    available_actions: list[Action]
+class TriageModelResponse(BaseModel):
+    available_actions: list[MessageChoice]
     response: str
     rollback: bool
+
+
+class TriageStepResponse(BaseModel):
+    available_actions: list[MessageChoice]
+    response: str
 
 
 class Triage:
     def __init__(
             self,
-            available_actions: list[Action],
             language: str
     ):
-        self.available_actions = available_actions
         self.gpt_client = GptClient()
-        self.actions_history: list[Action] = []
         self.language = language
 
     def step(
             self,
             conversation: Conversation,
-            user_message: str,
             depth: int = 0
-    ) -> str:
-        current_actions = conversation.messages[-1].choices
-        actions_str = self.parse_actions(current_actions)
+    ) -> TriageStepResponse:
+        self.gpt_client.creator.add_from_conversation(conversation.messages)
+        if len(conversation.messages) > 1:
+            current_actions = conversation.messages[-2].choices
+        else:
+            current_actions = ALL_ACTIONS
+        actions_str = self.__parse_actions(current_actions)
 
         generation_settings = GptGenerationSettings(
-            response_format=TriageActionResponse
-        )
-        self.gpt_client.creator.add(
-            user='',
-            assistant=triage_step(self.language),
-            system=''
+            response_format=TriageModelResponse
         )
 
+        if len(conversation.messages) == 1:
+            self.gpt_client.creator.add(
+                system=triage_step_system(actions_str),
+                assistant=triage_step(self.language)
+            )
+        self.gpt_client.creator.add(
+            user=conversation.messages[-1].text,
+        )
         response = self.gpt_client.response(
             messages=self.gpt_client.creator.messages,
             generation_settings=generation_settings,
             preset=[]
         )
-
-        return ''
+        self.gpt_client.creator.clear()
+        response = json.loads(response)
+        response = TriageModelResponse(**response)
+        if response.rollback:
+            self.__rollback()
+        else:
+            response = TriageStepResponse(**response.model_dump())
+            return response
 
     @staticmethod
-    def parse_actions(actions: list[Action]) -> str:
+    def __parse_actions(actions: list[MessageChoice] | None) -> str:
+        if actions is None:
+            return ''
         res = ''
-        for i, action in enumerate(actions):
-            res += f'{i + 1}. {action.name}\n'
+        for i, action_choice in enumerate(actions):
+            action = ALL_ACTIONS[action_choice.action_name.value]
+            res += f'{i + 1}. {action.name.value}\n'
             res += f'{action.description}\n'
-            res += f'-----------------------\n\n'
+            res += f'-----------------------\n'
         return res
 
-    def rollback(self):
+    def __rollback(self):
         pass

@@ -1,6 +1,7 @@
 from typing import Iterable
 
 from src.application.prompt_creator import PromptCreator
+from src.domain.conversation import Message
 
 
 class GptPromptCreator(PromptCreator):
@@ -40,4 +41,11 @@ class GptPromptCreator(PromptCreator):
                 else:
                     raise Exception("Wrong message format")
         except Exception as e:
-            logger.error(f"Adding prebuilt message in GptPromptCreator failed: {e}")
+            raise Exception(f"Invalid message format: {e}")
+
+    def add_from_conversation(self, messages: list[Message]):
+        for message in messages:
+            self.messages.append({
+                'role': message.type.value.lower(),
+                'content': message.text
+            })

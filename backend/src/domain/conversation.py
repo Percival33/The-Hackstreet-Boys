@@ -9,12 +9,18 @@ from src.domain.action import ActionName, ALL_ACTIONS, Action
 class MessageType(str, Enum):
     USER = "USER"
     SYSTEM = "SYSTEM"
+    ASSISTANT = "ASSISTANT"
+
+
+class MessageChoice(pydantic.BaseModel):
+    text: str
+    action_name: ActionName | None = None
 
 
 class Message(pydantic.BaseModel):
     type: MessageType
     text: str
-    choices: list[str] | None = None
+    choices: list[MessageChoice] | None = None
 
 
 class ConversationId:
