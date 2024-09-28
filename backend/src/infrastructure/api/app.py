@@ -2,6 +2,7 @@ import logging.config
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 from src.domain.exceptions import DomainException
 from src.infrastructure.api.error_handlers import application_error_handler
@@ -17,7 +18,7 @@ ALLOWED_ORIGINS = [
 container = Container()
 
 app = FastAPI()
-
+# app.add_middleware(HTTPSRedirectMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,

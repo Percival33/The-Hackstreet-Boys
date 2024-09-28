@@ -10,4 +10,6 @@ if __name__ == "__main__":
         port=settings.port,
         reload=settings.debug_mode,
         workers=8,
+        ssl_keyfile=settings.ssl_keyfile,
+        ssl_certfile=settings.ssl_certfile
     )
