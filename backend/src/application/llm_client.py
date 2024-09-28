@@ -1,6 +1,8 @@
 from abc import abstractmethod, ABC
 from typing import Iterable
 
+from src.application.generation_settings import GenerationSettings
+
 
 class LlmClient(ABC):
     def __init__(self):

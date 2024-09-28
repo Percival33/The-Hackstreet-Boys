@@ -2,8 +2,8 @@ from typing import Tuple, Iterable, Generator
 
 from openai import OpenAI
 
-from backend.src.application.generation_settings import GptGenerationSettings
-from backend.src.application.llm_client import LlmClient
+from src.application.generation_settings import GptGenerationSettings
+from src.application.llm_client import LlmClient
 
 
 class GptClient(LlmClient):
