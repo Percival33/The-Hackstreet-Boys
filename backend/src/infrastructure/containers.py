@@ -1,7 +1,6 @@
 from openai import OpenAI
 
 from src.application.conversation_service import ConversationService
-from src.application.form_serializer import FormSerializer
 from src.infrastructure.chroma.chroma_client import get_chroma_client
 from src.infrastructure.llm.triage.triage import Triage
 from src.infrastructure.mongo.mongo_client import get_mongo_client
@@ -10,6 +9,8 @@ from src.infrastructure.settings import settings
 from src.infrastructure.llm.forms.forms import FormsModel
 
 from dependency_injector import containers, providers
+
+from src.infrastructure.xml.xml_serializer import XmlSerializer
 
 
 class Container(containers.DeclarativeContainer):
@@ -27,7 +28,7 @@ class Container(containers.DeclarativeContainer):
 
     conversation_repository = providers.Factory(MongoConversationRepository, mongo_client)
 
-    form_serialzier = providers.Factory(FormSerializer)
+    form_serialzier = providers.Factory(XmlSerializer)
 
     triage_service = providers.Factory(Triage, "PL")
     forms_model = providers.Factory(FormsModel, "PL")
