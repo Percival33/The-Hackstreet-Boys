@@ -32,10 +32,7 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation) -> None:
-
-        # form_gpt_service.ask_about_fields(form.remaining_fields())
-        # mapping
-        remaining_fields: list[RemainingField] = []
+        self._forms_model.ask_question(conversation)
 
     def _generate_form(self, conversation: Conversation):
         return self._form_serialzier.serialize_pcc3(conversation.form)

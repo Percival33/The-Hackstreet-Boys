@@ -1,3 +1,4 @@
+import dataclasses
 import uuid
 from enum import StrEnum
 
@@ -102,5 +103,6 @@ class Conversation:
             "conversation_id": self.id.value,
             "messages": [msg.model_dump() for msg in self._messages],
             "available_actions": [action.name for action in self._available_actions],
-            "status": str(self._status)
+            "status": str(self._status),
+            "pcc3_form": dataclasses.asdict(self._pcc3_form),
         }

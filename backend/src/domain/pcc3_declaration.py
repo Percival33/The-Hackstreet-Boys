@@ -20,14 +20,14 @@ class PCC3Declaration:
     nr_lokalu: str | None = field(metadata={"id": "NrLokalu"}, default=None)
     miejscowosc: str | None = field(metadata={"id": "Miejscowosc"}, default=None)
     kod_pocztowy: str | None = field(metadata={"id": "KodPocztowy"}, default=None)
-    podmiot: int | None = field(metadata={"id": "P_7"}, default=None)
-    przedmiot_opadatkowania: int | None = field(metadata={"id": "P_20"}, default=None)
-    opis_sytuacji: str | None = field(metadata={"id": "P_23"}, default=None)
-    podstawa_opodatkowania: int | None = field(metadata={"id": "P_24"}, default=None)
-    obliczony_podatek_czynnosci: int | None = field(metadata={"id": "P_25"}, default=None)
-    kwota_podatku: int | None = field(metadata={"id": "P_46"}, default=None)
-    kwota_do_zaplaty: int | None = field(metadata={"id": "P_53"}, default=None)
-    ilosc_zalocznikow: int | None = field(metadata={"id": "P_62"}, default=None)
+    podmiot: int | None = field(metadata={"id": "P_7", "opis": "Podmiot składający deklarację"}, default=None)
+    przedmiot_opadatkowania: int | None = field(metadata={"id": "P_20", "opis": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne"}, default=None)
+    opis_sytuacji: str | None = field(metadata={"id": "P_23", "opis": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"}, default=None)
+    podstawa_opodatkowania: int | None = field(metadata={"id": "P_24", "opis": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"}, default=None)
+    obliczony_podatek_czynnosci: int | None = field(metadata={"id": "P_25", "opis": "bliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)"}, default=None)
+    kwota_podatku: int | None = field(metadata={"id": "P_46", "opis": "Kwota należnego podatku"}, default=None)
+    kwota_do_zaplaty: int | None = field(metadata={"id": "P_53", "opis": "Kwota podatku do zapłaty"}, default=None)
+    ilosc_zalocznikow: int | None = field(metadata={"id": "P_62", "opis": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"}, default=None)
 
     def get_remaining_fields(self) -> list[RemainingField]:
         unfilled_fields = []
@@ -35,5 +35,6 @@ class PCC3Declaration:
             value = getattr(self, f.name)
             if value is None:
                 _id = f.metadata.get("id", f.name)
-                unfilled_fields.append(RemainingField(_id, "test description"))
+                description = f.metadata.get("opis", "Brak opisu")
+                unfilled_fields.append(RemainingField(_id, description))
         return unfilled_fields
