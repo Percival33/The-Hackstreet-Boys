@@ -1,0 +1,159 @@
+{
+    "name": "Podmiot1",
+    "description": "Dane podatnika dokonującego zapłaty lub zwolnionego z podatku na podstawie art. 9 pkt 10 lit. b ustawy",
+    "fields": [
+        {
+            "choice": [
+                {
+                    "name": "IdentyfikatorOsobyFizycznej",
+                    "description": "Podstawowy zestaw danych identyfikacyjnych o osobie fizycznej z identyfikatorem NIP albo PESEL",
+                    "fields": [
+                        {
+                            "choice": [
+                                {
+                                    "name": "NIP",
+                                    "description": "Identyfikator podatkowy NIP"
+                                },
+                                {
+                                    "name": "PESEL",
+                                    "description": "Identyfikator podatkowy numer PESEL"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "ImiePierwsze",
+                            "description": "Pierwsze imię"
+                        },
+                        {
+                            "name": "Nazwisko",
+                            "description": "Nazwisko"
+                        },
+                        {
+                            "name": "DataUrodzenia",
+                            "description": "Data urodzenia"
+                        },
+                        {
+                            "name": "ImieMatki",
+                            "required": false,
+                            "description": "Imię matki"
+                        },
+                        {
+                            "name": "ImieOjca",
+                            "required": false,
+                            "description": "Imię ojca"
+                        }
+                    ]
+                },
+                {
+                    "name": "IdentyfikatorOsobyNiefizycznej",
+                    "description": "Pełny zestaw danych identyfikacyjnych o osobie niefizycznej",
+                    "fields": [
+                        {
+                            "name": "NIP",
+                            "required": false,
+                            "description": "Identyfikator podatkowy NIP"
+                        },
+                        {
+                            "name": "PelnaNazwa",
+                            "description": "Pełna nazwa"
+                        },
+                        {
+                            "name": "SkroconaNazwa",
+                            "description": "Skrócona nazwa"
+                        },
+                        {
+                            "name": "REGON",
+                            "description": "Numer REGON"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "choice": [
+                {
+                    "name": "TAdresPolski",
+                    "description": "Informacje opisujące adres polski",
+                    "fields": [
+                        {
+                            "name": "KodKraju",
+                            "description": "Kraj"
+                        },
+                        {
+                            "name": "Wojewodztwo",
+                            "description": "Województwo"
+                        },
+                        {
+                            "name": "Powiat",
+                            "description": "Powiat"
+                        },
+                        {
+                            "name": "Gmina",
+                            "description": "Gmina"
+                        },
+                        {
+                            "name": "Ulica",
+                            "required": false,
+                            "description": "Ulica"
+                        },
+                        {
+                            "name": "NrDomu",
+                            "description": "Nr domu"
+                        },
+                        {
+                            "name": "NrLokalu",
+                            "required": false,
+                            "description": "Nr lokalu"
+                        },
+                        {
+                            "name": "Miejscowosc",
+                            "description": "Miejscowość"
+                        },
+                        {
+                            "name": "KodPocztowy",
+                            "description": "Kod pocztowy"
+                        }
+                    ]
+                },
+                {
+                    "name": "TAdresZagraniczny",
+                    "description": "Informacje opisujące adres zagraniczny",
+                    "fields": [
+                        {
+                            "name": "KodKraju",
+                            "description": "Kraj"
+                        },
+                        {
+                            "name": "KodPocztowy",
+                            "required": false,
+                            "description": "Kod pocztowy"
+                        },
+                        {
+                            "name": "Miejscowosc",
+                            "description": "Miejscowość"
+                        },
+                        {
+                            "name": "Ulica",
+                            "required": false,
+                            "description": "Ulica"
+                        },
+                        {
+                            "name": "NrDomu",
+                            "required": false,
+                            "description": "Nr domu"
+                        },
+                        {
+                            "name": "NrLokalu",
+                            "required": false,
+                            "description": "Nr lokalu"
+                        }
+                    ]
+                }
+                
+            ]
+        }
+        
+    ]
+   
+
+}
