@@ -1,110 +1,396 @@
 [
     {
-        "name": "P_7",
-        "required": true,
-        "nullable": false,
-        "description": "Podmiot składający deklarację",
-        "values": [
+        "description": "obligatoryjne",
+        "fields": [
             {
-                "value": "1",
-                "description": "Podmiot zobowiązany solidarnie do zapłaty podatku"
+                "name": "P_7",
+                "required": true,
+                "nullable": false,
+                "description": "Podmiot składający deklarację",
+                "values": [
+                    {
+                        "value": "1",
+                        "description": "Podmiot zobowiązany solidarnie do zapłaty podatku"
+                    },
+                    {
+                        "value": "2",
+                        "description": "Strona umowy zamiany"
+                    },
+                    {
+                        "value": "3",
+                        "description": "Wspólnik spółki cywilnej"
+                    },
+                    {
+                        "value": "4",
+                        "description": "Podmiot, o którym mowa w art. 9 pkt 10 lit. b ustawy (pożyczkobiorca)"
+                    },
+                    {
+                        "value": "5",
+                        "description": "Inny podmiot - różny od: podmiotu zobowiązanego solidarnie do zapłaty podatku, strony umowy zamiany, wspólnika spółki cywilnej"
+                    }
+                ]
             },
             {
-                "value": "2",
-                "description": "Strona umowy zamiany"
+                "name": "P_20",
+                "required": true,
+                "nullable": false,
+                "description": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne",
+                "values": [
+                    {
+                        "value": "1",
+                        "description": "umowa"
+                    },
+                    {
+                        "value": "2",
+                        "description": "zmiana umowy"
+                    },
+                    {
+                        "value": "3",
+                        "description": "orzeczenie sądu lub ugoda"
+                    },
+                    {
+                        "value": "4",
+                        "description": "inne"
+                    }
+                ]
             },
             {
-                "value": "3",
-                "description": "Wspólnik spółki cywilnej"
+                "name": "P_21",
+                "required": false,
+                "nullable": false,
+                "description": "Miejsce położenia rzeczy lub miejsce wykonywania prawa majątkowego: 1 - terytorium RP, 2 - poza terytorium RP",
+                "values": [
+                    {
+                        "value": "1",
+                        "description": "terytorium RP"
+                    },
+                    {
+                        "value": "2",
+                        "description": "poza terytorium RP"
+                    }
+                ]
             },
             {
-                "value": "4",
-                "description": "Podmiot, o którym mowa w art. 9 pkt 10 lit. b ustawy (pożyczkobiorca)"
+                "name": "P_22",
+                "required": false,
+                "nullable": false,
+                "description": "Miejsce dokonania czynności cywilnoprawnej: 1 - terytorium RP, 2 - poza terytorium RP",
+                "values": [
+                    {
+                        "value": "1",
+                        "description": "terytorium RP"
+                    },
+                    {
+                        "value": "2",
+                        "description": "poza terytorium RP"
+                    }
+                ]
             },
             {
-                "value": "5",
-                "description": "Inny podmiot - różny od: podmiotu zobowiązanego solidarnie do zapłaty podatku, strony umowy zamiany, wspólnika spółki cywilnej"
+                "name": "P_23",
+                "required": true,
+                "nullable": false,
+                "description": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"
+            },
+            {
+                "name": "P_46",
+                "required": false,
+                "nullable": false,
+                "description": "Kwota należnego podatku"
+            },
+            {
+                "name": "P_53",
+                "required": true,
+                "nullable": false,
+                "description": "Kwota podatku do zapłaty"
+            },
+            {
+                "name": "P_62",
+                "required": false,
+                "nullable": false,
+                "description": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"
             }
         ]
     },
     {
-        "name": "P_20",
-        "required": true,
-        "nullable": false,
-        "description": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne",
-        "values": [
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Umowa sprzedaży (opodatkowana wg stawki podatku 1%)",
+        "fields": [
             {
-                "value": "1",
-                "description": "umowa"
+                "name": "P_24",
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
             },
             {
-                "value": "2",
-                "description": "zmiana umowy"
-            },
-            {
-                "value": "3",
-                "description": "orzeczenie sądu lub ugoda"
-            },
-            {
-                "value": "4",
-                "description": "inne"
+                "name": "P_25",
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)",
+                "required": true
             }
         ]
     },
     {
-        "name": "P_21",
-        "required": false,
-        "nullable": false,
-        "description": "Miejsce położenia rzeczy lub miejsce wykonywania prawa majątkowego: 1 - terytorium RP, 2 - poza terytorium RP",
-        "values": [
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Umowa sprzedaży (opodatkowana wg stawki podatku 2%)",
+        "fields": [
             {
-                "value": "1",
-                "description": "terytorium RP"
+                "name": "P_26",
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
             },
             {
-                "value": "2",
-                "description": "poza terytorium RP"
+                "name": "P_27",
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)",
+                "required": true
             }
         ]
     },
     {
-        "name": "P_22",
-        "required": false,
-        "nullable": false,
-        "description": "Miejsce dokonania czynności cywilnoprawnej: 1 - terytorium RP, 2 - poza terytorium RP",
-        "values": [
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Umowa zamiany",
+        "fields": [
             {
-                "value": "1",
-                "description": "terytorium RP"
+                "name": "P_28",
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
             },
             {
-                "value": "2",
-                "description": "poza terytorium RP"
+                "name": "P_29",
+                "description": "Stawka podatku określona zgodnie z art. 7 ustawy",
+                "required": true
+            },
+            {
+                "name": "P_30",
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)",
+                "required": true
             }
         ]
     },
     {
-        "name": "P_23",
-        "required": true,
-        "nullable": false,
-        "description": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Umowa pożyczki lub depozytu nieprawidłowego, w tym zwolniona na podstawie art. 9 pkt 10 lit. b ustawy",
+        "fields": [
+            {
+                "name": "P_31",
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            },
+            {
+                "name": "P_32",
+                "description": "Stawka podatku określona zgodnie z art. 7 ustawy",
+                "required": true
+            },
+            {
+                "name": "P_33",
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            }
+        ]
     },
     {
-        "name": "P_46",
-        "required": false,
-        "nullable": false,
-        "description": "Kwota należnego podatku"
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Umowa darowizny w części dotyczącej przejęcia przez obdarowanego długów i ciężarów lub zobowiązań darczyńcy",
+        "fields": [
+            {
+                "name": "P_34",
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            },
+            {
+                "name": "P_35",
+                "description": "Stawka podatku określona zgodnie z art. 7 ustawy",
+                "required": true
+            },
+            {
+                "name": "P_36",
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            }
+        ]
     },
     {
-        "name": "P_53",
-        "required": true,
-        "nullable": false,
-        "description": "Kwota podatku do zapłaty"
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Ustanowienie odpłatnego użytkowania, w tym nieprawidłowego",
+        "fields": [
+            {
+                "name": "P_37",
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            },
+            {
+                "name": "P_38",
+                "description": "Stawka podatku określona zgodnie z art. 7 ustawy",
+                "required": true
+            },
+            {
+                "name": "P_39",
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            }
+        ]
     },
     {
-        "name": "P_62",
-        "required": false,
-        "nullable": false,
-        "description": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Inna",
+        "fields": [
+            {
+                "name": "P_43A",
+                "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda)",
+                "required": true
+            },
+            {
+                "name": "P_43",
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            },
+            {
+                "name": "P_44",
+                "description": "Stawka podatku określona zgodnie z art. 7 ustawy",
+                "required": true
+            },
+            {
+                "name": "P_45",
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            }
+        ]
+    },
+    {
+        "description": "Obliczenie należnego podatku od umowy spółki / zmiany umowy spółki",
+        "fields": [
+            {
+                "name": "P_47",
+                "description": "Typ spółki: 1 - spółka osobowa, 2 - spółka kapitałowa",
+                "required": true,
+                "values": [
+                    {
+                        "value": "1",
+                        "description": "spółka osobowa"
+                    },
+                    {
+                        "value": "2",
+                        "description": "spółka kapitałowa"
+                    }
+                ]
+            },
+            {
+                "name": "P_48",
+                "description": "Podstawa opodatkowania dotyczy: 1 - zawarcia umowy spółki, 2 - zwiększenia majątku spółki albo podwyższenia kapitału zakładowego, 3 - dopłaty, 4 - pożyczki udzielonej spółce osobowej przez wspólnika, 5 - oddania spółce rzeczy lub praw majątkowych do nieodpłatnego używania, 6 - przekształcenia spółek, 7 - łączenia spółek, 8 - przeniesienia na terytorium Rzeczypospolitej Polskiej rzeczywistego ośrodka zarządzania spółki kapitałowej lub jej siedziby",
+                "required": true,
+                "values": [
+                    {
+                        "value": "1",
+                        "description": "zawarcia umowy spółki"
+                    },
+                    {
+                        "value": "2",
+                        "description": "zwiększenia majątku spółki albo podwyższenia kapitału zakładowego"
+                    },
+                    {
+                        "value": "3",
+                        "description": "dopłaty"
+                    },
+                    {
+                        "value": "4",
+                        "description": "pożyczki udzielonej spółce osobowej przez wspólnika"
+                    },
+                    {
+                        "value": "5",
+                        "description": "oddania spółce rzeczy lub praw majątkowych do nieodpłatnego używania"
+                    },
+                    {
+                        "value": "6",
+                        "description": "przekształcenia spółek"
+                    },
+                    {
+                        "value": "7",
+                        "description": "łączenia spółek"
+                    },
+                    {
+                        "value": "8",
+                        "description": "przeniesienia na terytorium Rzeczypospolitej Polskiej rzeczywistego ośrodka zarządzania spółki kapitałowej lub jej siedziby"
+                    }
+                ]
+            },
+            {
+                "name": "P_49",
+                "description": "Podstawa opodatkowania - określona zgodnie z art. 6 ust. 1 pkt 8 ustawy (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            },
+            {
+                "name": "P_50",
+                "description": "Opłaty i koszty związane z zawarciem umowy spółki lub jej zmiany - na podstawie art. 6 ust. 9 ustawy",
+                "required": false
+            },
+            {
+                "name": "P_51",
+                "description": "Podstawa obliczenia podatku",
+                "required": true
+            },
+            {
+                "name": "P_52",
+                "description": "Kwota należnego podatku (po zaokrągleniu do pełnych złotych)",
+                "required": true
+            }
+        ]
+    },
+    {
+        "description": "Informacje dodatkowe",
+        "fields": [
+            {
+                "name": "P_54",
+                "description": "Województwo",
+                "required": true
+            },
+            {
+                "name": "P_55",
+                "description": "Powiat",
+                "required": true
+            },
+            {
+                "name": "P_56",
+                "description": "Gmina",
+                "required": true
+            },
+            {
+                "name": "P_57",
+                "description": "Ulica",
+                "required": false
+            },
+            {
+                "name": "P_58",
+                "description": "Nr domu",
+                "required": true
+            },
+            {
+                "name": "P_59",
+                "description": "Nr lokalu",
+                "required": false
+            },
+            {
+                "name": "P_60",
+                "description": "Miejscowość",
+                "required": true
+            },
+            {
+                "name": "P_61",
+                "description": "Kod pocztowy",
+                "required": true
+            }
+        ]
+    },
+    {
+        "description": "Rodzaj czynności cywilnoprawnej (w tym zmiana umowy, orzeczenie sądu lub ugoda) - Ustanowienie hipoteki",
+        "fields": [
+            {
+                "name": "P_40",
+                "@type": "etd:TKwotaCNieujemna",
+                "required": true,
+                "description": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych) - opodatkowana wg stawki podatku 0,1 %"
+            },
+            {
+                "name": "P_41",
+                "@type": "etd:TKwotaCNieujemna",
+                "required": true,
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)"
+            },
+            {
+                "name": "P_42",
+                "required": true,
+                "description": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) - dot. ustanowienia hipoteki na zabezpieczenie wierzytelności o wysokości nieustalonej"
+            }
+        ]
     }
 ]
