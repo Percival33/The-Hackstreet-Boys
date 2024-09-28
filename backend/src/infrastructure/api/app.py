@@ -11,8 +11,7 @@ from src.infrastructure.containers import Container
 logging.config.fileConfig("logging.conf", disable_existing_loggers=False)
 
 ALLOWED_ORIGINS = [
-    "http://localhost",
-    "http://localhost:3000",
+    "*"
 ]
 
 container = Container()

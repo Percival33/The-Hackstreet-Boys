@@ -1,10 +1,10 @@
-from enum import Enum
+from enum import StrEnum
 import pydantic
 
 from src.domain.descriptions.descriptions import *
 
 
-class ActionName(str, Enum):
+class ActionName(StrEnum):
     PCC3 = "PCC3"
     SD3 = "SD"
     DN1 = "DN-1"

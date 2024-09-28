@@ -1,12 +1,12 @@
 import uuid
-from enum import Enum
+from enum import StrEnum
 
 import pydantic
 
 from src.domain.action import ActionName, ALL_ACTIONS, Action
 
 
-class MessageType(str, Enum):
+class MessageType(StrEnum):
     USER = "USER"
     SYSTEM = "SYSTEM"
     ASSISTANT = "ASSISTANT"
@@ -16,9 +16,10 @@ class Message(pydantic.BaseModel):
     type: MessageType
     text: str
     choices: list[str] | None = None
+    action_to_perform: ActionName | None = None
 
 
-class ConversationStatus(str, Enum):
+class ConversationStatus(StrEnum):
     TRIAGE = "TRIAGE"
     FORM = "FORM"
 
@@ -79,8 +80,8 @@ class Conversation:
     def finish_triage(self):
         self._status = ConversationStatus.FORM
 
-    def set_available_actions(self):
-        self._available_actions = ALL_ACTIO
+    def set_available_actions(self, actions: list[ActionName]) -> None:
+        self._available_actions = [ALL_ACTIONS[action_name] for action_name in actions]
 
     @classmethod
     def from_initial_user_message(cls, message_text: str) -> "Conversation":
@@ -90,10 +91,9 @@ class Conversation:
         return f"{self._conversation_id} {self._messages} {self._available_actions}"
 
     def __dict__(self) -> dict:
-        print([msg.dict() for msg in self._messages])
         return {
             "conversation_id": self.id.value,
             "messages": [msg.model_dump() for msg in self._messages],
-            "available_actions": [str(action.name) for action in self._available_actions],
+            "available_actions": [action.name for action in self._available_actions],
             "status": str(self._status)
         }
