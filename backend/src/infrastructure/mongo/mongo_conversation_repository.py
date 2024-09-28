@@ -4,6 +4,7 @@ from typing import Mapping, Any
 from pymongo import MongoClient
 
 from src.application.conversation_repository import ConversationRepository
+from src.domain.action import ALL_ACTIONS
 from src.domain.conversation import Conversation, ConversationId, MessageType, Message
 from src.infrastructure.settings import settings
 
@@ -36,6 +37,11 @@ class MongoConversationRepository(ConversationRepository):
 
     @staticmethod
     def _map_collection_to_conversation(collection: Mapping[str, Any]) -> Conversation:
+        available_actions = list(filter(
+            lambda action: action.name in collection["available_actions"],
+            ALL_ACTIONS
+        ))
+
         return Conversation(
             conversation_id=ConversationId(collection["conversation_id"]),
             messages=[Message(
@@ -43,4 +49,5 @@ class MongoConversationRepository(ConversationRepository):
                 text=msg["text"],
                 choices=msg["choices"]
             ) for msg in collection["messages"]],
+            available_actions=available_actions
         )

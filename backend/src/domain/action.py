@@ -1,12 +1,18 @@
 from enum import Enum
 
+import pydantic
+
 
 class ActionName(str, Enum):
     PCC3 = "PCC3"
-    NO_ACTION = "NO_ACTION"
 
 
-ALL_ACTIONS = {
-    ActionName.PCC3: "PCC3",
-    ActionName.NO_ACTION: "no action",
-}
+class Action(pydantic.BaseModel):
+    name: ActionName
+    description: str
+    user_description: str
+
+
+ALL_ACTIONS = [
+    Action(name=ActionName.PCC3, description="opis pcc3", user_description="Musisz wypelnic pcc3"),
+]

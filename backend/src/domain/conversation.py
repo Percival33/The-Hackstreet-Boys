@@ -3,7 +3,7 @@ from enum import Enum
 
 import pydantic
 
-from src.domain.action import Action, ActionName, ALL_ACTIONS
+from src.domain.action import ActionName, ALL_ACTIONS, Action
 
 
 class MessageType(str, Enum):
@@ -15,13 +15,6 @@ class Message(pydantic.BaseModel):
     type: MessageType
     text: str
     choices: list[str] | None = None
-
-    def __dict__(self) -> dict:
-        return {
-            "type": self.type.value,
-            "text": self.text,
-            "choices": self.choices
-        }
 
 
 class ConversationId:
@@ -65,7 +58,7 @@ class Conversation:
         return self._messages
 
     @property
-    def available_actions(self) -> list[ActionName]:
+    def available_actions(self) -> list[Action]:
         return self._available_actions
 
     def append_message(self, message: Message) -> None:
@@ -76,11 +69,12 @@ class Conversation:
         return cls(messages=[Message(type=MessageType.USER, text=message_text)])
 
     def __str__(self):
-        return f"{self._conversation_id} {self._messages}"
+        return f"{self._conversation_id} {self._messages} {self._available_actions}"
 
     def __dict__(self) -> dict:
+        print([msg.dict() for msg in self._messages])
         return {
             "conversation_id": self.id.value,
-            "messages": [msg.__dict__() for msg in self._messages],
-            "available_actions": [str(action) for action in self._available_actions],
+            "messages": [msg.model_dump() for msg in self._messages],
+            "available_actions": [str(action.name) for action in self._available_actions],
         }
