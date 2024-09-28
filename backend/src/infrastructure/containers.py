@@ -23,5 +23,3 @@ class Container(containers.DeclarativeContainer):
     mongo_client = providers.Singleton(get_mongo_client)
 
     conversation_repository = providers.Factory(MongoConversationRepository, mongo_client)
-
-    triage = providers.Factory(Triage, "PL")

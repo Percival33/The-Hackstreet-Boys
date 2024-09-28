@@ -22,7 +22,6 @@ logger = logging.getLogger(__name__)
 def start_conversation(
         request: MessageRequest,
         conversation_repo: ConversationRepository = Depends(Provide[Container.conversation_repository]),
-        triage_service: Triage = Depends(Provide[Container.triage]),
 ) -> ConversationResponse:
     if request.conversation_id is None:
         conversation = Conversation.from_initial_user_message(request.text)
@@ -30,8 +29,7 @@ def start_conversation(
         conversation = conversation_repo.find(ConversationId(request.conversation_id))
         conversation.append_message(Message(type=MessageType.USER, text=request.text))
 
-    result = triage_service.step(conversation)
-    conversation_id = result.conversation_id.
+    conversation.append_message(Message(type=MessageType.SYSTEM, text="Mock model response"))
 
     # process conversation
     conversation_repo.save(conversation)
