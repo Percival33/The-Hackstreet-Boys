@@ -6,6 +6,7 @@ from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter, UploadFile, Depends, status, HTTPException, BackgroundTasks
 
 from src.application.conversation_repository import ConversationRepository
+from src.application.conversation_service import ConversationService
 from src.domain.conversation import Conversation, ConversationId, Message, MessageType
 from src.infrastructure.api.requests import MessageRequest
 from src.infrastructure.api.responses import BaseResponse, ConversationResponse
@@ -19,8 +20,9 @@ logger = logging.getLogger(__name__)
 
 @router.post("/conversation", response_model=ConversationResponse)
 @inject
-def start_conversation(
+def conversation(
         request: MessageRequest,
+        conversation_service: ConversationService = Depends(Provide[Container.conversation_service]),
         conversation_repo: ConversationRepository = Depends(Provide[Container.conversation_repository]),
 ) -> ConversationResponse:
     if request.conversation_id is None:
@@ -29,10 +31,6 @@ def start_conversation(
         conversation = conversation_repo.find(ConversationId(request.conversation_id))
         conversation.append_message(Message(type=MessageType.USER, text=request.text))
 
-    conversation.append_message(Message(type=MessageType.SYSTEM, text="Mock model response"))
+    conversation_service.process(conversation)
 
-    # process conversation
-    conversation_repo.save(conversation)
-
-    conversation_repo.save(conversation)
     return ConversationResponse.from_conversation(conversation)

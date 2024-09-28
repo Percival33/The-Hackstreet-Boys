@@ -1,5 +1,6 @@
 from openai import OpenAI
 
+from src.application.conversation_service import ConversationService
 from src.infrastructure.chroma.chroma_client import get_chroma_client
 from src.infrastructure.llm.triage.triage import Triage
 from src.infrastructure.mongo.mongo_client import get_mongo_client
@@ -23,3 +24,7 @@ class Container(containers.DeclarativeContainer):
     mongo_client = providers.Singleton(get_mongo_client)
 
     conversation_repository = providers.Factory(MongoConversationRepository, mongo_client)
+
+    triage_service = providers.Factory(Triage, "PL")
+
+    conversation_service = providers.Factory(ConversationService, conversation_repository, triage_service)

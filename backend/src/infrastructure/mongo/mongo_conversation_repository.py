@@ -37,10 +37,7 @@ class MongoConversationRepository(ConversationRepository):
 
     @staticmethod
     def _map_collection_to_conversation(collection: Mapping[str, Any]) -> Conversation:
-        available_actions = list(filter(
-            lambda action: action.name in collection["available_actions"],
-            ALL_ACTIONS
-        ))
+        available_actions = [ALL_ACTIONS[action_name] for action_name in collection["available_actions"]]
 
         return Conversation(
             conversation_id=ConversationId(collection["conversation_id"]),

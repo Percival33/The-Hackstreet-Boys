@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+from src.domain.action import ALL_ACTIONS
 from src.domain.conversation import Conversation, Message
 
 
@@ -11,6 +12,7 @@ class MessageResponse(BaseResponse):
     type: str
     text: str
     choices: list[str] | None = None
+    action_to_perform: dict | None = None
 
 
 class ConversationResponse(BaseResponse):
@@ -25,7 +27,12 @@ class ConversationResponse(BaseResponse):
                 MessageResponse(
                     type=message.type,
                     text=message.text,
-                    choices=message.choices
+                    choices=message.choices,
+                    action_to_perform={
+                        "name": message.action_to_perform.name,
+                        "description": ALL_ACTIONS[message.action_to_perform].user_description,
+                        "references": ALL_ACTIONS[message.action_to_perform].references,
+                    } if message.action_to_perform else None,
                 ) for message in conversation.messages
-            ]
+            ],
         )
