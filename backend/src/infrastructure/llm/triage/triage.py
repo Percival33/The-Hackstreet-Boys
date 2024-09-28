@@ -1,14 +1,16 @@
 import json
-from typing import List
-
+import logging
 from pydantic import BaseModel
 from src.application.generation_settings import GptGenerationSettings
-from src.domain.action import ActionName, ALL_ACTIONS, Action
-from src.domain.conversation import Conversation, Message
+from src.domain.action import ActionName, Action
+from src.domain.conversation import Conversation
+from src.infrastructure.llm.expert.domain_expert import DomainExpert
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
 from src.infrastructure.llm.triage.prompts import triage_step_action, triage_step_response_system, triage_step_response, \
     triage_step_action_system
+
+logger = logging.getLogger(__name__)
 
 
 class TriageStepResponse(BaseModel):
@@ -39,11 +41,12 @@ class Triage:
             conversation: Conversation,
             depth: int = 0
     ) -> TriageStepResponse:
-        self.gpt_client.creator.add_from_conversation(conversation.messages)
+        creator = GptPromptCreator()
+        creator.add_from_conversation(conversation.messages)
         current_actions = conversation.available_actions
         actions_str = self.__parse_actions(current_actions)
 
-        initial_messages = self.gpt_client.creator.messages
+        initial_messages = creator.messages
 
         def filter_actions(actions: list[Action]) -> list[Action]:
             creator = GptPromptCreator()
@@ -69,6 +72,7 @@ class Triage:
 
         def conversation_response() -> TriageStepResponse:
             creator = GptPromptCreator()
+            expert = DomainExpert(self.language)
             creator.add_prebuilt(initial_messages)
             generation_settings = GptGenerationSettings(
                 response_format=TriageStepResponse
@@ -86,13 +90,12 @@ class Triage:
 
         actions_response = filter_actions(current_actions)
         choices_response = conversation_response()
-
-        self.gpt_client.creator.clear()
         step_response = TriageStepResponse(
             available_actions=[action.name for action in actions_response],
             available_choices=choices_response.available_choices,
             response=choices_response.response
         )
+        logger.info(f"Actions to keep: {str([v.value for v in step_response.available_actions])}")
         return step_response
 
     @staticmethod

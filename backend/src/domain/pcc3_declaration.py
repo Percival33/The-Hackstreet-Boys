@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field, fields
 
+
 @dataclass
 class RemainingField:
     name: str
     description: str
+
 
 @dataclass
 class PCC3Declaration:
@@ -21,13 +23,23 @@ class PCC3Declaration:
     miejscowosc: str | None = field(metadata={"id": "Miejscowosc"}, default=None)
     kod_pocztowy: str | None = field(metadata={"id": "KodPocztowy"}, default=None)
     podmiot: int | None = field(metadata={"id": "P_7", "opis": "Podmiot składający deklarację"}, default=None)
-    przedmiot_opadatkowania: int | None = field(metadata={"id": "P_20", "opis": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne"}, default=None)
-    opis_sytuacji: str | None = field(metadata={"id": "P_23", "opis": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"}, default=None)
-    podstawa_opodatkowania: int | None = field(metadata={"id": "P_24", "opis": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"}, default=None)
-    obliczony_podatek_czynnosci: int | None = field(metadata={"id": "P_25", "opis": "bliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)"}, default=None)
+    przedmiot_opadatkowania: int | None = field(metadata={"id": "P_20",
+                                                          "opis": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne"},
+                                                default=None)
+    opis_sytuacji: str | None = field(
+        metadata={"id": "P_23", "opis": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"},
+        default=None)
+    podstawa_opodatkowania: int | None = field(metadata={"id": "P_24",
+                                                         "opis": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"},
+                                               default=None)
+    obliczony_podatek_czynnosci: int | None = field(metadata={"id": "P_25",
+                                                              "opis": "bliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)"},
+                                                    default=None)
     kwota_podatku: int | None = field(metadata={"id": "P_46", "opis": "Kwota należnego podatku"}, default=None)
     kwota_do_zaplaty: int | None = field(metadata={"id": "P_53", "opis": "Kwota podatku do zapłaty"}, default=None)
-    ilosc_zalocznikow: int | None = field(metadata={"id": "P_62", "opis": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"}, default=None)
+    ilosc_zalocznikow: int | None = field(
+        metadata={"id": "P_62", "opis": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"},
+        default=None)
 
     def get_remaining_fields(self) -> list[RemainingField]:
         unfilled_fields = []
