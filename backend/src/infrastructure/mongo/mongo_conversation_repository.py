@@ -5,7 +5,8 @@ from pymongo import MongoClient
 
 from src.application.conversation_repository import ConversationRepository
 from src.domain.action import ALL_ACTIONS
-from src.domain.conversation import Conversation, ConversationId, MessageType, Message
+from src.domain.conversation import Conversation, ConversationId, MessageType, Message, ConversationStatus
+from src.domain.pcc3_declaration import PCC3Declaration
 from src.infrastructure.settings import settings
 
 logger = logging.getLogger(__name__)
@@ -46,5 +47,7 @@ class MongoConversationRepository(ConversationRepository):
                 text=msg["text"],
                 choices=msg["choices"]
             ) for msg in collection["messages"]],
-            available_actions=available_actions
+            status=ConversationStatus[collection["status"]],
+            available_actions=available_actions,
+            form=PCC3Declaration(**collection["pcc3_form"]),
         )

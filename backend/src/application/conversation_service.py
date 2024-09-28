@@ -1,6 +1,13 @@
+from dataclasses import dataclass
+
 from src.application.conversation_repository import ConversationRepository
 from src.domain.conversation import Conversation, Message, MessageType, ConversationStatus
+from src.domain.pcc3_declaration import RemainingField
+from src.infrastructure.llm.forms.forms import FormsModel
 from src.infrastructure.llm.triage.triage import Triage
+from src.application.form_serializer import FormSerializer
+
+
 
 
 class ConversationService:
@@ -8,18 +15,27 @@ class ConversationService:
         self,
         conversations_repo: ConversationRepository,
         triage_service: Triage,
+        form_serialization: FormSerializer,
+        forms_model: FormsModel,
     ):
         self._repo = conversations_repo
         self._triage_service = triage_service
+        self._form_serialzier = form_serialization
+        self._forms_model = forms_model
 
-    def process(self, conversation: Conversation) -> None:
+    def process(self, conversation: Conversation) -> None | str:
         if conversation.status == ConversationStatus.FORM:
             self._process_form(conversation)
+        elif conversation.status == ConversationStatus.GENERATION:
+            return self._generate_form(conversation)
         else:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation) -> None:
-        pass
+        self._forms_model.ask_question(conversation)
+
+    def _generate_form(self, conversation: Conversation):
+        return self._form_serialzier.serialize_pcc3(conversation.form)
 
     def _process_triage(self, conversation: Conversation) -> None:
         result = self._triage_service.step(conversation)
@@ -38,5 +54,8 @@ class ConversationService:
                 action_to_perform=action_to_perform
             )
         )
+
+        if action_to_perform is not None:
+            self._forms_model.initialize_form(conversation)
 
         self._repo.save(conversation)

@@ -1,18 +1,40 @@
-from pydantic import BaseModel, Field, validator
-from typing import Optional
-from datetime import date
+from dataclasses import dataclass, field, fields
 
+@dataclass
+class RemainingField:
+    name: str
+    description: str
 
-class PCC3Declaration(BaseModel):
-    data_dokonania_czynnosci: date = Field(..., alias="P4", description="DATA DOKONANIA CZYNNOŚCI")
-    cel_zlozenia_deklaracji: int = Field(..., alias="P6", description="CEL ZŁOŻENIA DEKLARACJI")
-    podmiot_skladajacy_deklaracje: int = Field(..., alias="P7", description="PODMIOT SKŁADAJĄCY DEKLARACJĘ")
-    przedmiot_opodatkowania: int = Field(..., alias="P20", description="PRZEDMIOT OPODATKOWANIA")
-    miejsce_polozenia_rzeczy: Optional[int] = Field(None, alias="P21", description="MIEJSCE POŁOŻENIA RZECZY LUB WYKONYWANIA PRAWA MAJĄTKOWEGO")
-    miejsce_dokonania_czynnosci: Optional[int] = Field(None, alias="P22", description="MIEJSCE DOKONANIA CZYNNOŚCI CYWILNOPRAWNEJ")
-    okreslenie_czynnosci: str = Field(..., alias="P23", description="ZWIĘZŁE OKREŚLENIE TREŚCI I PRZEDMIOTU CZYNNOŚCI CYWILNOPRAWNEJ")
-    podstawa_opodatkowania: float = Field(..., alias="P26", description="PODSTAWA OPODATKOWANIA DLA UMOWY SPRZEDAŻY (w PLN, zaokrąglona do pełnych złotych)")
-    obliczony_nalezny_podatek: Optional[float] = Field(None, alias="P27", description="OBLICZONY NALEŻNY PODATEK OD UMOWY SPRZEDAŻY (w PLN, zaokrąglony do pełnych złotych)")
-    kwota_naleznego_podatku: Optional[float] = Field(None, alias="P46", description="KWOTA NALEŻNEGO PODATKU (w PLN, zaokrąglona do pełnych złotych)")
-    kwota_podatku_do_zaplaty: Optional[float] = Field(None, alias="P53", description="KWOTA PODATKU DO ZAPŁATY (w PLN, zaokrąglona do pełnych złotych)")
-    liczba_zalacznikow_pcc_3a: Optional[int] = Field(0, alias="P62", description="LICZBA DOŁĄCZONYCH ZAŁĄCZNIKÓW PCC-3/A")
+@dataclass
+class PCC3Declaration:
+    kod_urzedu_skarbowego: str | None = field(metadata={"id": "KodUrzedu"}, default=None)
+    pesel: str | None = field(metadata={"id": "PESEL"}, default=None)
+    imie_pierwsze: str | None = field(metadata={"id": "ImiePierwsze"}, default=None)
+    nazwisko: str | None = field(metadata={"id": "Nazwisko"}, default=None)
+    data_urodzenia: str | None = field(metadata={"id": "DataUrodzenia"}, default=None)
+    wojewodztwo: str | None = field(metadata={"id": "Wojewodztwo"}, default=None)
+    powiat: str | None = field(metadata={"id": "Powiat"}, default=None)
+    gmina: str | None = field(metadata={"id": "Gmina"}, default=None)
+    ulica: str | None = field(metadata={"id": "Ulica"}, default=None)
+    nr_domu: str | None = field(metadata={"id": "NrDomu"}, default=None)
+    nr_lokalu: str | None = field(metadata={"id": "NrLokalu"}, default=None)
+    miejscowosc: str | None = field(metadata={"id": "Miejscowosc"}, default=None)
+    kod_pocztowy: str | None = field(metadata={"id": "KodPocztowy"}, default=None)
+    podmiot: int | None = field(metadata={"id": "P_7", "opis": "Podmiot składający deklarację"}, default=None)
+    przedmiot_opadatkowania: int | None = field(metadata={"id": "P_20", "opis": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne"}, default=None)
+    opis_sytuacji: str | None = field(metadata={"id": "P_23", "opis": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"}, default=None)
+    podstawa_opodatkowania: int | None = field(metadata={"id": "P_24", "opis": "Podstawa opodatkowania określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"}, default=None)
+    obliczony_podatek_czynnosci: int | None = field(metadata={"id": "P_25", "opis": "bliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych)"}, default=None)
+    kwota_podatku: int | None = field(metadata={"id": "P_46", "opis": "Kwota należnego podatku"}, default=None)
+    kwota_do_zaplaty: int | None = field(metadata={"id": "P_53", "opis": "Kwota podatku do zapłaty"}, default=None)
+    ilosc_zalocznikow: int | None = field(metadata={"id": "P_62", "opis": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"}, default=None)
+
+    def get_remaining_fields(self) -> list[RemainingField]:
+        unfilled_fields = []
+        for f in fields(self):
+            value = getattr(self, f.name)
+            if value is None:
+                _id = f.metadata.get("id", f.name)
+                description = f.metadata.get("opis", "Brak opisu")
+                unfilled_fields.append(RemainingField(_id, description))
+        return unfilled_fields
