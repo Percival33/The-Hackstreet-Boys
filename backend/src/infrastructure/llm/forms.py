@@ -5,7 +5,12 @@ from pydantic import BaseModel
 
 from src.application.generation_settings import GptGenerationSettings
 from src.infrastructure.llm.gpt_client import GptClient
-from src.infrastructure.llm.prompts import forms_process_response
+from src.infrastructure.llm.prompts import forms_process_response, forms_ask_question
+
+
+class AskQuestionSchema(BaseModel):
+    message: str
+    answered_fields: list[int]
 
 
 class ProcessedFieldSchema(BaseModel):
@@ -18,34 +23,51 @@ class ProcessingSchema(BaseModel):
 
 
 class FormsModel:
-    def __init__(self, conversation_history: list[str]):
+    def __init__(self, conversation_history: list[str], language: str):
         self.conversation_history = conversation_history
-        self.client = GptClient()
+        self.gpt_client = GptClient()
+        self.language = language
 
     def initialize_form(self, schema: dict):
         pass
 
     def ask_question(self, schema: dict):
-        pass
+        generation_settings = GptGenerationSettings(
+            response_format=AskQuestionSchema
+        )
+        self.gpt_client.creator.add(
+            user=self.conversation_history,
+            assistant=forms_ask_question(self.language),
+            system=str(schema)
+        )
+
+        response = self.gpt_client.response(
+            messages=self.gpt_client.creator.messages,
+            generation_settings=generation_settings,
+            preset=[]
+        )
+        self.gpt_client.creator.clear()
+        response = json.loads(response)
+        response = AskQuestionSchema(**response)
+        return response
 
     def process_response(self, response: str, schema: dict) -> ProcessingSchema:
         generation_settings = GptGenerationSettings(
             response_format=ProcessingSchema
         )
-        self.client.creator.add(
+        self.gpt_client.creator.add(
             user=response,
             assistant=forms_process_response(),
             system=str(schema)
         )
 
-        response = self.client.response(
-            messages=self.client.creator.messages,
+        response = self.gpt_client.response(
+            messages=self.gpt_client.creator.messages,
             generation_settings=generation_settings,
             preset=[]
         )
+        self.gpt_client.creator.clear()
 
         response = json.loads(response)
-
         response = ProcessingSchema(**response)
-
         return response
