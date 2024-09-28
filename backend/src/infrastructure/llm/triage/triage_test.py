@@ -33,3 +33,5 @@ if __name__ == '__main__':
     _ = [conversation_sample.append_message(i) for i in messages]
 
     res = triage.step(conversation_sample)
+
+    print(res)
