@@ -53,7 +53,7 @@ class Conversation:
     ) -> None:
         self._conversation_id = conversation_id or ConversationId.generate()
         self._messages = messages or []
-        self._available_actions = available_actions or ALL_ACTIONS
+        self._available_actions = available_actions or ALL_ACTIONS.values()
 
     @property
     def id(self) -> ConversationId:

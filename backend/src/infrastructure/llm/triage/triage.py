@@ -23,7 +23,7 @@ class TriageModelResponse(BaseModel):
 
 
 class TriageStepResponse(BaseModel):
-    available_actions: list[MessageChoice]
+    available_choices: list[MessageChoice]
     response: str
 
 
@@ -44,7 +44,7 @@ class Triage:
         if len(conversation.messages) > 1:
             current_actions = conversation.messages[-2].choices
         else:
-            current_actions = ALL_ACTIONS
+            current_actions = ALL_ACTIONS.values()
         actions_str = self.__parse_actions(current_actions)
 
         generation_settings = GptGenerationSettings(
@@ -79,7 +79,7 @@ class Triage:
             return ''
         res = ''
         for i, action_choice in enumerate(actions):
-            action = ALL_ACTIONS[action_choice.action_name.value]
+            action = ALL_ACTIONS[action_choice.action_name]
             res += f'{i + 1}. {action.name.value}\n'
             res += f'{action.description}\n'
             res += f'-----------------------\n'

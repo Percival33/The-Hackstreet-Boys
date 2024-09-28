@@ -13,6 +13,6 @@ class Action(pydantic.BaseModel):
     user_description: str
 
 
-ALL_ACTIONS = [
-    Action(name=ActionName.PCC3, description="opis pcc3", user_description="Musisz wypelnic pcc3"),
-]
+ALL_ACTIONS = {
+    ActionName.PCC3: Action(name=ActionName.PCC3, description="opis pcc3", user_description="Musisz wypelnic pcc3"),
+}
