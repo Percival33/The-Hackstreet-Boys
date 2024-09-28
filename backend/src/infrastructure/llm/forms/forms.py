@@ -1,11 +1,11 @@
 import json
-from typing import Any, Union
+from typing import Union
 
 from pydantic import BaseModel
 
 from src.application.generation_settings import GptGenerationSettings
-from src.infrastructure.llm.gpt_client import GptClient
-from src.infrastructure.llm.prompts import forms_process_response, forms_ask_question
+from src.infrastructure.llm.forms.gpt_client import GptClient
+from src.infrastructure.llm.forms.prompts import forms_process_response, forms_ask_question
 
 
 class AskQuestionSchema(BaseModel):

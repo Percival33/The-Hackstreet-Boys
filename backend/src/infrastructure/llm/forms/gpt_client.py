@@ -1,10 +1,10 @@
-from typing import Tuple, Iterable, Generator
+from typing import Iterable, Generator
 
 from openai import OpenAI
 
 from src.application.generation_settings import GptGenerationSettings
 from src.application.llm_client import LlmClient
-from src.infrastructure.llm.gpt_prompt_creator import GptPromptCreator
+from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
 
 
 class GptClient(LlmClient):
