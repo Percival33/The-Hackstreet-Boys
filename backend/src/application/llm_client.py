@@ -9,9 +9,10 @@ class LlmClient(ABC):
         pass
 
     @abstractmethod
-    def stream_response(self, messages: Iterable[object], generation_settings: GenerationSettings):
+    def stream_response(self, messages: Iterable[object], generation_settings: GenerationSettings,
+                        preset: Iterable[dict]):
         pass
 
     @abstractmethod
-    def response(self, messages: Iterable[object], generation_settings: GenerationSettings):
+    def response(self, messages: Iterable[object], generation_settings: GenerationSettings, preset: Iterable[dict]):
         pass
