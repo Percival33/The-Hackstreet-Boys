@@ -16,13 +16,20 @@ class XmlSerializer(FormSerializer):
 
 
 	def _map_domain_to_xml(self, declaration: PCC3Declaration)->Deklaracja:
-		us_code = TkodUs(declaration.kod_urzedu_skarbowego)
-		header = Tnaglowek(Tnaglowek.KodFormularza(TkodFormularza.PCC_3), TnaglowekWariantFormularza.VALUE_6, Tnaglowek.CelZlozenia(TcelZlozenia.VALUE_1), Tnaglowek.Data(XmlDate.today()), us_code)
-
+		header = self._get_header(declaration)
 		person = Deklaracja.Podmiot1.OsobaFizyczna(**self._fields(declaration, self.PERSON_FIELDS))
+		address = self._get_addr(declaration)
+		return Deklaracja(header, Deklaracja.Podmiot1(person, None, address), self._get_details(declaration), Decimal(1))
+
+	def _get_addr(self, declaration: PCC3Declaration) -> Deklaracja.Podmiot1.AdresZamieszkaniaSiedziby:
 		adr = TadresPolski(TadresPolskiKodKraju.PL, **self._fields(declaration, self.ADRESS_FIELDS))
-		addr = Deklaracja.Podmiot1.AdresZamieszkaniaSiedziby(adr)
-		z = Deklaracja.Podmiot1(person, None, addr)
+		return Deklaracja.Podmiot1.AdresZamieszkaniaSiedziby(adr)
+
+	def _get_header(self, declaration: PCC3Declaration) -> Tnaglowek:
+		us_code = TkodUs(declaration.kod_urzedu_skarbowego)
+		return Tnaglowek(Tnaglowek.KodFormularza(TkodFormularza.PCC_3), TnaglowekWariantFormularza.VALUE_6, Tnaglowek.CelZlozenia(TcelZlozenia.VALUE_1), Tnaglowek.Data(XmlDate.today()), us_code)
+
+	def _get_details(self, declaration: PCC3Declaration) -> Deklaracja.PozycjeSzczegolowe:
 		p_fields = {
 			"p_7": PozycjeSzczegoloweP7(declaration.podmiot),
 			"p_20": PozycjeSzczegoloweP20(declaration.przedmiot_opadatkowania),
@@ -33,9 +40,7 @@ class XmlSerializer(FormSerializer):
 			"p_53": declaration.kwota_do_zaplaty,
 			"p_62": declaration.ilosc_zalocznikow,
 		}
-
-		detail = Deklaracja.PozycjeSzczegolowe(**p_fields)
-		return Deklaracja(header, z, detail, Decimal(1))
+		return Deklaracja.PozycjeSzczegolowe(**p_fields)
 
 	def _fields(self, declaration: PCC3Declaration, fields: list[str]):
 		return {x: declaration.__dict__[x] for x in declaration.__dict__ if x in fields}
