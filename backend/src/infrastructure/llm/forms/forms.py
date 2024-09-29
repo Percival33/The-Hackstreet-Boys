@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 class AskQuestionSchema(BaseModel):
     message: str
-    answered_fields: list[int]
+    answered_fields: list[str]
 
 
 class ProcessedFieldSchema(BaseModel):

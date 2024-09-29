@@ -34,8 +34,8 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation) -> None:
-        # self._forms_model.ask_question(conversation)
-
+        res = self._forms_model.ask_question(conversation)
+        print(res)
         # self._repo.save(conversation)
         pass
 
@@ -77,7 +77,7 @@ class ConversationService:
             form_dict = dataclasses.asdict(conversation.form)
 
             for field in update.fields:
-                form_dict[field.field_number] = field.field_value
+                form_dict[field.field_id] = field.field_value
 
             conversation.set_form(PCC3Declaration(**form_dict))
 
