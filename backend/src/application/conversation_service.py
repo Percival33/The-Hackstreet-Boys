@@ -34,6 +34,8 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation, process_response: bool = True) -> None:
+        logger.info(f"Processing form, remaining fields: {conversation.form.get_remaining_fields()}")
+
         if process_response:
             update_with = self._forms_model.process_response(conversation)
             print(update_with)
