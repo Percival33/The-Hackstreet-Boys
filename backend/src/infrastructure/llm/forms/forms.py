@@ -23,7 +23,7 @@ class AskQuestionSchema(BaseModel):
 
 
 class ProcessedFieldSchema(BaseModel):
-    field_number: int
+    field_number: str
     field_value: Union[str, int, float, bool]
 
 

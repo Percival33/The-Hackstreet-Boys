@@ -1,11 +1,15 @@
+import dataclasses
+import logging
 from dataclasses import dataclass
 
 from src.application.conversation_repository import ConversationRepository
 from src.domain.conversation import Conversation, Message, MessageType, ConversationStatus
-from src.domain.pcc3_declaration import RemainingField
+from src.domain.pcc3_declaration import RemainingField, PCC3Declaration
 from src.infrastructure.llm.forms.forms import FormsModel
 from src.infrastructure.llm.triage.triage import Triage
 from src.application.form_serializer import FormSerializer
+
+logger = logging.getLogger(__name__)
 
 
 class ConversationService:
@@ -30,7 +34,10 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation) -> None:
-        self._forms_model.ask_question(conversation)
+        # self._forms_model.ask_question(conversation)
+
+        # self._repo.save(conversation)
+        pass
 
     def _generate_form(self, conversation: Conversation):
         if not conversation.xml:
@@ -56,6 +63,24 @@ class ConversationService:
         )
 
         if action_to_perform is not None:
-            self._forms_model.initialize_form(conversation)
+            individual_schema = self._forms_model.is_individual(conversation)
+            if individual_schema.user_type == "individual":
+                conversation.form.czy_fizyczna = True
+            elif individual_schema.user_type == "company":
+                conversation.form.czy_fizyczna = False
+
+            tax_rate = self._forms_model.tax_rate(conversation)
+            conversation.form.procent_podatku = tax_rate
+
+            update = self._forms_model.initialize_form(conversation)
+
+            form_dict = dataclasses.asdict(conversation.form)
+
+            for field in update.fields:
+                form_dict[field.field_number] = field.field_value
+
+            conversation.set_form(PCC3Declaration(**form_dict))
+
+            self._process_form(conversation)
 
         self._repo.save(conversation)

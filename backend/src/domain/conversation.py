@@ -87,6 +87,8 @@ class Conversation:
     @property
     def xml(self) -> str | None:
         return self._generated_xml
+    def set_form(self, new_form: PCC3Declaration) -> None:
+        self._pcc3_form = new_form
 
     def append_message(self, message: Message) -> None:
         self._messages.append(message)
