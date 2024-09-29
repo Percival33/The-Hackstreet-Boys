@@ -5,8 +5,8 @@ from importlib.metadata import metadata
 @dataclass
 class RemainingField:
 	name: str
-	description: str
-
+	description: str | None = None
+	rule: str | None = None
 
 @dataclass
 class PCC3Declaration:
@@ -94,6 +94,6 @@ class PCC3Declaration:
 				if self.procent_podatku=='2' and _id in ['P_24', 'P_25']:
 					continue
 
-			description = f.metadata.get("opis", "Brak opisu")
+			description = f.metadata.get("opis")
 			unfilled_fields.append(RemainingField(_id, description))
 		return unfilled_fields

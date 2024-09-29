@@ -56,12 +56,17 @@ class FormsModel:
         conversation_history_str = self.get_conversation_history(conversation)
 
         schema_str = ''
-        for instance in schema:
-            for field in fields(instance):
-                field_name = field.name
-                field_value = getattr(instance, field_name)
-                schema_str += f'{field_name}: {field_value}\n'
+        for field in schema:
+            schema_str += f"Nazwa: {field.name}\n"
+
+            if field.description:
+                schema_str += f"Opis: {field.description}\n"
+
+            if field.rule:
+                schema_str += f"Reguła: {field.rule}\n"
+
             schema_str += "\n"
+
         creator.add(
             system=conversation_history_str,
             assistant=forms_initialize_form(),
@@ -116,7 +121,9 @@ class FormsModel:
         response = ChooseModelSchema(**response)
         return response
 
-    def form_question(self, schema: dict, conversation: Conversation):
+    def form_question(self, conversation: Conversation):
+        schema = conversation.form.get_remaining_fields()
+
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
