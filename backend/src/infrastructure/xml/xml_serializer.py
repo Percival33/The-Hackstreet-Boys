@@ -38,19 +38,36 @@ class XmlSerializer(FormSerializer):
 		return Tnaglowek(Tnaglowek.KodFormularza(TkodFormularza.PCC_3), TnaglowekWariantFormularza.VALUE_6, Tnaglowek.CelZlozenia(TcelZlozenia.VALUE_1), Tnaglowek.Data(XmlDate.today()), us_code)
 
 	def _get_details(self, declaration: PCC3Declaration) -> Deklaracja.PozycjeSzczegolowe:
+		"""
+		:ivar p_54: Województwo
+        :ivar p_55: Powiat
+        :ivar p_56: Gmina
+        :ivar p_57: Ulica
+        :ivar p_58: Nr domu
+        :ivar p_59: Nr lokalu
+        :ivar p_60: Miejscowość
+        :ivar p_61: Kod pocztowy
+		"""
 		p_fields = {
 			"p_7": PozycjeSzczegoloweP7(declaration.podmiot),
 			"p_20": PozycjeSzczegoloweP20(declaration.przedmiot_opadatkowania),
 			"p_23": declaration.opis_sytuacji,
-
 			"p_46": declaration.kwota_podatku,
+			"P_54": declaration.wojewodztwo,
+			"p_55": declaration.powiat,
+			"p_56": declaration.gmina,
+			"p_57": declaration.ulica,
+			"p_58": declaration.nr_domu,
+			"p_59": declaration.nr_lokalu,
+			"p_60": declaration.miejscowosc,
+			"p_61": declaration.kod_pocztowy,
 			"p_53": declaration.kwota_do_zaplaty,
 			"p_62": declaration.ilosc_zalocznikow,
 		}
 		if declaration.procent_podatku == "0.5":
 			additional_fields = {
-				"p_40": declaration.podstawa_opodatkowania_p05,
-				"p_41": declaration.obliczony_podatek_czynnosci_p05,
+				"p_49": declaration.podstawa_opodatkowania_p05,
+				"p_50": declaration.obliczony_podatek_czynnosci_p05,
 			}
 		elif declaration.procent_podatku == "2":
 			additional_fields = {
