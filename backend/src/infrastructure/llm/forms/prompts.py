@@ -26,3 +26,11 @@ def forms_initialize_form():
 def forms_initialize_form_user(schema_str: str):
     return f'''Schema:
 {schema_str}'''
+
+
+def forms_is_individual():
+    return '''Based on given conversation history determine if the user is an individual or a company. If you are not certain return "unknown"'''
+
+
+def forms_tax_rate():
+    return '''Based on given conversation history and your domain knowledge determine what is the tax rate for the user.'''

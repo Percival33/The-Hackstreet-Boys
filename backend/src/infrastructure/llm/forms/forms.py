@@ -1,7 +1,7 @@
 import json
 from dataclasses import fields
 from enum import Enum
-from typing import Union
+from typing import Union, Literal
 import logging
 from pydantic import BaseModel
 
@@ -12,7 +12,7 @@ from src.infrastructure.llm.expert.prompts import expert_choose_responder, exper
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
 from src.infrastructure.llm.forms.prompts import forms_process_response, forms_ask_question, forms_initialize_form, \
-    forms_initialize_form_user
+    forms_initialize_form_user, forms_is_individual, forms_tax_rate
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,10 @@ class ChooseModelSchema(BaseModel):
     model: Model
 
 
+class IsIndividualSchema(BaseModel):
+    user_type: Literal["individual", "company", "unknown"]
+
+
 class FormsModel:
     def __init__(self, language: str):
         self.language = language
@@ -49,10 +53,7 @@ class FormsModel:
         creator = GptPromptCreator()
         gpt_client = GptClient()
 
-        conversation_history = conversation.messages
-        conversation_history_str = ''
-        for message in conversation_history:
-            conversation_history_str += f'[{message.type.value}]\n{message.text}\n\n'
+        conversation_history_str = self.get_conversation_history(conversation)
 
         schema_str = ''
         for instance in schema:
@@ -79,13 +80,6 @@ class FormsModel:
 
         response = json.loads(response)
         response = FieldFillSchema(**response)
-
-        for field in response.fields:
-            field_number = field.field_number
-            field_value = field.field_value
-            print(f"Field number: {field_number}, Field value: {field_value}")
-            print(schema[field_number - 1])
-            print("\n\n")
 
         return response
 
@@ -164,3 +158,60 @@ class FormsModel:
         response = json.loads(response)
         response = FieldFillSchema(**response)
         return response
+
+    def is_individual(self, conversation: Conversation) -> IsIndividualSchema:
+        creator = GptPromptCreator()
+        gpt_client = GptClient()
+        generation_settings = GptGenerationSettings(
+            response_format=IsIndividualSchema
+        )
+        creator.add(
+            assistant=forms_is_individual(),
+            system=self.get_conversation_history(conversation)
+        )
+
+        response = gpt_client.response(
+            messages=creator.messages,
+            generation_settings=generation_settings,
+            preset=[]
+        )
+        response = json.loads(response)
+        response = IsIndividualSchema(**response)
+        return response
+
+    def tax_rate(self, conversation: Conversation) -> float:
+        possible_values = [0.05, 0.1, 0.2]
+        gpt_client = GptClient()
+
+        response = gpt_client.assistant_response(
+            prompt='Determine tax rate based on your knowledge',
+            context=self.get_conversation_history(conversation),
+            assistant_id='asst_AazFHWo1StCE7J2MqRHtYFvh',
+            temperature=0.2,
+        )
+        response = float(response)
+        if response > 1:
+            response = response / 10
+        if response not in possible_values:
+            return 0.2
+        return response
+        # creator.add(
+        #     assistant=forms_tax_rate(),
+        #     user=self.get_conversation_history(conversation)
+        # )
+        # response = gpt_client.response(
+        #     messages=creator.messages,
+        #     generation_settings=generation_settings,
+        #     preset=[]
+        # )
+        # response = json.loads(response)
+        # response = TaxRates(response)
+        # return response.value
+
+    @staticmethod
+    def get_conversation_history(conversation: Conversation) -> str:
+        conversation_history = conversation.messages
+        conversation_history_str = ''
+        for message in conversation_history:
+            conversation_history_str += f'[{message.type.value}]\n{message.text}\n\n'
+        return conversation_history_str
