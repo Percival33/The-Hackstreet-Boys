@@ -197,7 +197,7 @@ const Container = (props) => {
 
 
     const [options, setOptions] = useState([
-    "Chcę zapłacić podatek","Jak uniknąć podwójnego opodatkowania","Chcę wdrożyć system e-faktur","Jak zoptymalizować podatki" 
+    "Jak rozliczyć podatek od sprzedaży nieruchomości?","Jak uniknąć podwójnego opodatkowania?","Chcę wdrożyć system e-faktur.","Jak prawidłowo rozliczyć podatki?" 
     ]);
 
 
@@ -418,7 +418,7 @@ newConversationHandler={()=>{
       </div>}
           </Ul>
 
-          <StyledInput placeholder="Type something..." 
+          <StyledInput placeholder="Opisz swoją sprawę..." 
         value={inputValue}
         // isPcc={isPcc3Flow} 
         disabled={loading 
