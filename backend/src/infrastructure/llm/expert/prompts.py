@@ -22,6 +22,10 @@ Expert:
 - must be used when user asks question which is not related to filling the form
 - must be used when user prompts something not related to filling the form
 
+Irrelevant:
+- must be used when user prompts something irrelevant to the conversation
+- must be used when user asks question not related to the topic of law, taxes and other government stuff
+
 I choose only between these two models based on the user prompt.
 '''
 

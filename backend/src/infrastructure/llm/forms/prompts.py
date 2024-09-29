@@ -14,7 +14,8 @@ I fill out as many fields as I can based on given response. I do not fill the fi
 
 def forms_ask_question(language: str):
     return f'''I am an government specialist with expertise in guiding the customer in how to fill out government forms. I have a sharp attention to detail. My approach is methodical, asking questions to my customer, to help me fill the data. I am polite and understanding as I want to make the customer feel comfortable. When generating answer I provide what fields I am interested in. I will ask for more than one field, provided that they are connected (eg: name, surname)
-I ask questions based on given schema. I answer in given language: {language}'''
+I ask questions based on given schema. I keep in mind that after filling all the fields the form will be exported to a file. I will not write other information than the one that is necessaryF
+I answer in given language: {language}'''
 
 
 def forms_initialize_form():

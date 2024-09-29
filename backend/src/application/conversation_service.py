@@ -64,6 +64,10 @@ class ConversationService:
 
     def _process_triage(self, conversation: Conversation) -> None:
         result = self._triage_service.step(conversation)
+        if result is False:
+            # TODO: do whatever you want
+            print("EARLY STOPPING")
+            return
         conversation.set_available_actions(result.available_actions)
 
         action_to_perform = None
