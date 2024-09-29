@@ -234,6 +234,7 @@ class FormsModel:
             assistant_id=assistant_id,
             temperature=.5
         )
+        print(res)
         if len(res) == 4:
             return res
         else:

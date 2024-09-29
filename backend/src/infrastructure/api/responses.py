@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 from src.domain.action import ALL_ACTIONS
 from src.domain.conversation import Conversation, Message
-from src.infrastructure.llm.forms.initialize_form_test import conversation
 
 
 class BaseResponse(BaseModel):
