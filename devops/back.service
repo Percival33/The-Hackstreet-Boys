@@ -1,0 +1,12 @@
+[Unit]
+Description=Run back-end in background
+After=network.target
+
+[Service]
+User=root
+Restart=on-failure
+RestartSec=5
+ExecStart=/root/The-Hackstreet-Boys/devops/back-up.sh
+
+[Install]
+WantedBy=multi-user.target
