@@ -41,6 +41,7 @@ class ConversationService:
 
         if len(conversation.form.get_remaining_fields()) == 0:
             conversation.finish_form_processing()
+            self._generate_form(conversation)
             self._repo.save(conversation)
             return
 
@@ -50,10 +51,6 @@ class ConversationService:
             type=MessageType.ASSISTANT,
             text=result.message
         ))
-
-        if len(conversation.form.get_remaining_fields()) == 0:
-            conversation.finish_form_processing()
-            self._generate_form(conversation)
 
         self._repo.save(conversation)
 
