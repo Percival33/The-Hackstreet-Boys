@@ -26,7 +26,7 @@ class RemainingField:
 
 @dataclass
 class PCC3Declaration:
-	kod_urzedu_skarbowego: str | None = field(metadata={"id": "KodUrzedu"}, default=None)
+	kod_urzedu_skarbowego: str | None = field(metadata={"id": "KodUrzedu", "opis": "Nazwa urzędu skarbowego"}, default=None)
 	data_dokonania_czynnosci: str | None = field(metadata={"id": "Data", "opis": "Data dokonania czynności w formacie YYYY-MM-DD"}, default=None)
 
 	# FIZYCZNA
