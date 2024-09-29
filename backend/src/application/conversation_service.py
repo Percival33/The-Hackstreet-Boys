@@ -34,6 +34,8 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation, process_response: bool = True) -> None:
+        logger.info(f"Processing form, remaining fields: {conversation.form.get_remaining_fields()}")
+
         if process_response:
             update_with = self._forms_model.process_response(conversation)
             print(update_with)
@@ -41,6 +43,7 @@ class ConversationService:
 
         if len(conversation.form.get_remaining_fields()) == 0:
             conversation.finish_form_processing()
+            self._generate_form(conversation)
             self._repo.save(conversation)
             return
 
@@ -50,10 +53,6 @@ class ConversationService:
             type=MessageType.ASSISTANT,
             text=result.message
         ))
-
-        if len(conversation.form.get_remaining_fields()) == 0:
-            conversation.finish_form_processing()
-            self._generate_form(conversation)
 
         self._repo.save(conversation)
 
