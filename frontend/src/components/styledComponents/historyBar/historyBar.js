@@ -74,11 +74,11 @@ const items = [
 
 
 const HistoryBar = props => {
-  const [isHidden, setIsHidden] = useState(false);
+  // const [isHidden, setIsHidden] = useState(false);
   // const [allConversations, setAllConversations] = useState([]);
 
   const toggleNavbar = () => {
-    setIsHidden(!isHidden);
+    props.setIsHidden(!props.isHidden);
   };
 
   // useEffect(() => {
@@ -104,8 +104,8 @@ const HistoryBar = props => {
   return (
     <>
    
-    <Navbar isHidden={isHidden}>
-    <HideButton onClick={toggleNavbar} isHidden={isHidden}>
+    <Navbar isHidden={props.isHidden}>
+    <HideButton onClick={toggleNavbar} isHidden={props.isHidden}>
     <FaArrowLeft style={{color:'#0052a5'}}/>
         </HideButton>
     <PStyled>Historia zapytań</PStyled>

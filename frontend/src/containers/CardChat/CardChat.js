@@ -227,6 +227,12 @@ const Container = (props) => {
      
     }, [entireResponses]);
 
+useEffect(() => {
+  if(isPcc3Flow){
+    props.setIsHidden(true)
+  }
+}, [isPcc3Flow]);
+
     useEffect(() => { 
    if(!!actionToPerform){
 
@@ -381,13 +387,19 @@ newConversationHandler={()=>{
           
           {!entireResponses && options.map((card, index) => (
   <li key={index} style={{ margin: '10px' }}>
-    <Card title={card.title} content={card} setInputValue={setInputValue} />
+    <Card title={card} content={card} setInputValue={setInputValue} 
+    visible={!loading}
+    // visible={true}
+     />
   </li>
 ))}
            
            {(!isPcc3Flow && !!entireResponses ) && entireResponses.messages[entireResponses.messages.length-1]?.choices?.map((card, index) => (
               <li key={index} style={{ margin: '10px' }}>
-                <Card title={card.title} content={card} setInputValue={setInputValue}/>
+                <Card title={card} content={card} setInputValue={setInputValue}  
+                visible={!loading} 
+                // visible={true}
+                />
               </li>
             ))}
             

@@ -31,7 +31,8 @@ const Wrapper = styled.div`
  
 
 const IndexPage = () => {
-  
+  const [isHidden, setIsHidden] = useState(false);
+
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const conversation_id = params.get('conversation_id');
@@ -69,12 +70,12 @@ const [entireResponses, setEntireResponses] = useState([]);
   
   return (
   <>
-  <Header>Poradnik podatkowy</Header>
+  <Header>Przewodnik Podatkowy</Header>
   <NavBar />
 
 <Wrapper>
-  <HistoryBar allConversations={entireResponses}/>
-  <FlexContainer conversation_obj={entireResponses.filter(obj=>obj.conversation_id==conversation_id)[0]} isId={!!conversation_id} conversation_id={conversation_id}>test </FlexContainer>
+  <HistoryBar allConversations={entireResponses} isHidden={isHidden} setIsHidden={setIsHidden}/>
+  <FlexContainer conversation_obj={entireResponses.filter(obj=>obj.conversation_id==conversation_id)[0]} isId={!!conversation_id} conversation_id={conversation_id} isHidden={isHidden} setIsHidden={setIsHidden}>test </FlexContainer>
 </Wrapper>
   
   <Layout>
