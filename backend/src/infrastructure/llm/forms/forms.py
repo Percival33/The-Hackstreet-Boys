@@ -44,6 +44,10 @@ class IsIndividualSchema(BaseModel):
     user_type: Literal["individual", "company", "unknown"]
 
 
+class CodeSchema(BaseModel):
+    code: str
+
+
 class FormsModel:
     def __init__(self, language: str):
         self.language = language
@@ -232,10 +236,22 @@ class FormsModel:
         res = client.assistant_response(
             prompt=value,
             assistant_id=assistant_id,
-            temperature=.5
+            temperature=1
         )
-        print(res)
-        if len(res) == 4:
+        if res is not None and len(res) == 4:
             return res
         else:
+            creator = GptPromptCreator()
+            creator.add(
+                assistant='Extract the code of the tax office from the given text. Return only the code. ',
+                user=res
+            )
+            res = client.response(
+                messages=creator.messages,
+                generation_settings=GptGenerationSettings(response_format=CodeSchema, temperature=.7),
+            )
+            res = json.loads(res)
+            res = CodeSchema(**res).code
+            if len(res) == 4:
+                return res
             return '1435'  # remove default value
