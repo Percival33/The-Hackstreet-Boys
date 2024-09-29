@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from src.application.conversation_repository import ConversationRepository
 from src.domain.conversation import Conversation, Message, MessageType, ConversationStatus
 from src.domain.pcc3_declaration import RemainingField, PCC3Declaration
-from src.infrastructure.llm.forms.forms import FormsModel
+from src.infrastructure.llm.forms.forms import FormsModel, FieldFillSchema
 from src.infrastructure.llm.triage.triage import Triage
 from src.application.form_serializer import FormSerializer
 
@@ -33,7 +33,12 @@ class ConversationService:
         else:
             self._process_triage(conversation)
 
-    def _process_form(self, conversation: Conversation) -> None:
+    def _process_form(self, conversation: Conversation, process_response: bool = True) -> None:
+        if process_response:
+            update_with = self._forms_model.process_response(conversation)
+            print(update_with)
+            self._update_schema(conversation, update_with)
+
         result = self._forms_model.ask_question(conversation)
 
         conversation.append_message(Message(
@@ -78,11 +83,15 @@ class ConversationService:
 
             update = self._forms_model.initialize_form(conversation)
 
-            form_dict = dataclasses.asdict(conversation.form)
+            self._update_schema(conversation, update)
 
-            for field in update.fields:
-                form_dict[field.field_id] = field.field_value
+            self._process_form(conversation, False)
 
-            conversation.set_form(PCC3Declaration(**form_dict))
+    @staticmethod
+    def _update_schema(conversation: Conversation, update_with: FieldFillSchema):
+        form_dict = dataclasses.asdict(conversation.form)
 
-            self._process_form(conversation)
+        for field in update_with.fields:
+            form_dict[field.field_id] = field.field_value
+
+        conversation.set_form(PCC3Declaration(**form_dict))
