@@ -191,7 +191,7 @@ class FormsModel:
         if response > 1:
             response = response / 100
         if response not in possible_values:
-            return 0.2
+            return 0.02
         return response
 
     @staticmethod
