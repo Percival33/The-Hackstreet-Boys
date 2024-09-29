@@ -1,9 +1,10 @@
 import dataclasses
-
+from dataclasses import fields
 from pydantic import BaseModel
 
 from src.domain.action import ALL_ACTIONS
 from src.domain.conversation import Conversation, Message
+from src.infrastructure.llm.forms.initialize_form_test import conversation
 
 
 class BaseResponse(BaseModel):
@@ -21,10 +22,10 @@ class ConversationResponse(BaseResponse):
     conversation_id: str
     messages: list[MessageResponse]
     form: dict
+    xml: str
 
     @classmethod
     def from_conversation(cls, conversation: Conversation) -> "ConversationResponse":
-        form = dataclasses.asdict(conversation.form)
         hidden_fields = conversation.form.get_hidden_fields()
         return ConversationResponse(
             conversation_id=conversation.id.value,
@@ -40,5 +41,10 @@ class ConversationResponse(BaseResponse):
                     } if message.action_to_perform else None,
                 ) for message in conversation.messages
             ],
-            form={x: form[x] for x in form if x not in hidden_fields},
+            form={
+                field_.metadata.get("id", ""): getattr(conversation.form, field_.name)
+                for field_ in fields(conversation.form)
+                if field_.metadata.get("id", "") not in hidden_fields
+            },
+            xml=conversation.xml
         )
