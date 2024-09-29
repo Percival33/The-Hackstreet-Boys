@@ -225,7 +225,7 @@ class FormsModel:
     @staticmethod
     def swap_for_enum(value: str) -> str:
         client = GptClient()
-
+        assistant_id='asst_jhOguRuVIGb7n8R80GuRFR4p'
         client.assistant_response(
             prompt=value
         )
