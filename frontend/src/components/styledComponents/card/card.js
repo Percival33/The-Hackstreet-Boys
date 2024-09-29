@@ -3,20 +3,15 @@ import styled from 'styled-components';
 
 // Define the styled components
 const CardContainer = styled.div`
-  // background-color:#0052a5;
   background-color:#fff;
   border: 1px solid #d3d3d3; /* Light grey border */
   border-radius: 6px; /* Rounded corners */
-  //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  // padding: 20px 0;
-  margin: 25px 0 0px;
+  margin: 10px 0 0px;
   transition: transform 0.2s; /* Smooth hover effect */
-  // width:300px;
-  // height:400px;
   width:20vw;
   max-width:15vw;
   padding: 20px 16px;
-  // color:black;
+  font-size:10px;
 
   display: flex;
   flex-direction: column;
@@ -47,7 +42,6 @@ const CardContent = styled.p`
 const Card = ({ title, content,setInputValue }) => {
   return (
     <CardContainer onClick={()=> setInputValue(content)}>
-      {/* <CardTitle>{title}</CardTitle> */}
       <CardContent>{content}</CardContent>
     </CardContainer>
   );
