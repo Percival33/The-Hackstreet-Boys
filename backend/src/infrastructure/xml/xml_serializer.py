@@ -35,19 +35,17 @@ class XmlSerializer(FormSerializer):
 
 	def _get_header(self, declaration: PCC3Declaration) -> Tnaglowek:
 		us_code = TkodUs(declaration.kod_urzedu_skarbowego)
-		return Tnaglowek(Tnaglowek.KodFormularza(TkodFormularza.PCC_3), TnaglowekWariantFormularza.VALUE_6, Tnaglowek.CelZlozenia(TcelZlozenia.VALUE_1), Tnaglowek.Data(XmlDate.today()), us_code)
+		try:
+			y, m, d = declaration.data_dokonania_czynnosci.split('-', 2)
+			date = XmlDate(int(y), int(m), int(d))
+			if date < XmlDate(2024, 1, 1):
+				date = XmlDate.today()
+		except Exception:
+			date = XmlDate.today()
+
+		return Tnaglowek(Tnaglowek.KodFormularza(TkodFormularza.PCC_3), TnaglowekWariantFormularza.VALUE_6, Tnaglowek.CelZlozenia(TcelZlozenia.VALUE_1), Tnaglowek.Data(date), us_code)
 
 	def _get_details(self, declaration: PCC3Declaration) -> Deklaracja.PozycjeSzczegolowe:
-		"""
-		:ivar p_54: Województwo
-        :ivar p_55: Powiat
-        :ivar p_56: Gmina
-        :ivar p_57: Ulica
-        :ivar p_58: Nr domu
-        :ivar p_59: Nr lokalu
-        :ivar p_60: Miejscowość
-        :ivar p_61: Kod pocztowy
-		"""
 		p_fields = {
 			"p_7": PozycjeSzczegoloweP7(declaration.podmiot),
 			"p_20": PozycjeSzczegoloweP20(declaration.przedmiot_opadatkowania),
