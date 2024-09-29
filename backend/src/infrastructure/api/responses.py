@@ -32,7 +32,7 @@ class ConversationResponse(BaseResponse):
                 MessageResponse(
                     type=message.type,
                     text=message.text,
-                    choices=message.choices,
+                    choices=message.choices[:4],
                     action_to_perform={
                         "name": message.action_to_perform.name,
                         "description": ALL_ACTIONS[message.action_to_perform].user_description,
