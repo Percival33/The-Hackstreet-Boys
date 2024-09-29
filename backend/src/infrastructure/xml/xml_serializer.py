@@ -53,7 +53,7 @@ class XmlSerializer(FormSerializer):
 			"p_20": PozycjeSzczegoloweP20(declaration.przedmiot_opadatkowania),
 			"p_23": declaration.opis_sytuacji,
 			"p_46": declaration.kwota_podatku,
-			"P_54": declaration.wojewodztwo,
+			"p_54": declaration.wojewodztwo,
 			"p_55": declaration.powiat,
 			"p_56": declaration.gmina,
 			"p_57": declaration.ulica,
@@ -71,7 +71,7 @@ class XmlSerializer(FormSerializer):
 			}
 		elif declaration.procent_podatku == "2":
 			additional_fields = {
-				"P_26": declaration.podstawa_opodatkowania_p2,
+				"p_26": declaration.podstawa_opodatkowania_p2,
 				"p_27": declaration.obliczony_podatek_czynnosci_p2,
 			}
 		else:
