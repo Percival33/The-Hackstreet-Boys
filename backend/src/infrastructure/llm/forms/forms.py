@@ -178,7 +178,7 @@ class FormsModel:
         return response
 
     def tax_rate(self, conversation: Conversation) -> float:
-        possible_values = [0.05, 0.1, 0.2]
+        possible_values = [0.005, 0.01, 0.02]
         gpt_client = GptClient()
 
         response = gpt_client.assistant_response(
@@ -187,7 +187,10 @@ class FormsModel:
             assistant_id='asst_AazFHWo1StCE7J2MqRHtYFvh',
             temperature=0.2,
         )
-        response = float(response)
+        try:
+            response = float(response)
+        except Exception:
+            return 0.02
         if response > 1:
             response = response / 100
         if response not in possible_values:
