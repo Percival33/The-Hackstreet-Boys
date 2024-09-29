@@ -7,7 +7,7 @@ class BaseRequest(BaseModel):
 
 class MessageRequest(BaseRequest):
     conversation_id: str | None = None
-    text: str
+    text: str | None = None
 
 
 class FormRequest(BaseRequest):

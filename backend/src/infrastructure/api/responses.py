@@ -24,6 +24,8 @@ class ConversationResponse(BaseResponse):
 
     @classmethod
     def from_conversation(cls, conversation: Conversation) -> "ConversationResponse":
+        form = dataclasses.asdict(conversation.form)
+        hidden_fields = conversation.form.get_hidden_fields()
         return ConversationResponse(
             conversation_id=conversation.id.value,
             messages=[
@@ -38,5 +40,5 @@ class ConversationResponse(BaseResponse):
                     } if message.action_to_perform else None,
                 ) for message in conversation.messages
             ],
-            form=dataclasses.asdict(conversation.form),
+            form={x: form[x] for x in form if x not in hidden_fields},
         )

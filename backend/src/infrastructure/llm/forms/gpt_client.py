@@ -5,7 +5,6 @@ from openai import OpenAI
 
 from src.application.generation_settings import GptGenerationSettings
 from src.application.llm_client import LlmClient
-from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
 from src.infrastructure.settings import settings
 
 

@@ -7,6 +7,7 @@ import pydantic
 from src.domain.action import ActionName, ALL_ACTIONS, Action
 from src.domain.pcc3_declaration import PCC3Declaration
 
+
 class MessageType(StrEnum):
     USER = "USER"
     SYSTEM = "SYSTEM"
@@ -54,13 +55,15 @@ class Conversation:
             messages: list[Message] | None = None,
             available_actions: list[Action] | None = None,
             status: ConversationStatus | None = None,
-            form: PCC3Declaration | None = None
+            form: PCC3Declaration | None = None,
+            generated_xml: str | None = None
     ) -> None:
         self._conversation_id = conversation_id or ConversationId.generate()
         self._messages = messages or []
         self._available_actions = available_actions or ALL_ACTIONS.values()
         self._status = status or ConversationStatus.TRIAGE
         self._pcc3_form = form or PCC3Declaration()
+        self._generated_xml = generated_xml
 
     @property
     def id(self) -> ConversationId:
@@ -82,18 +85,24 @@ class Conversation:
     def form(self) -> PCC3Declaration:
         return self._pcc3_form
 
+    @property
+    def xml(self) -> str | None:
+        return self._generated_xml
+
+    def set_form(self, new_form: PCC3Declaration) -> None:
+        self._pcc3_form = new_form
+
     def append_message(self, message: Message) -> None:
         self._messages.append(message)
 
     def finish_triage(self):
         self._status = ConversationStatus.FORM
 
+    def set_xml(self, xml):
+        self._generated_xml = xml
+
     def set_available_actions(self, actions: list[ActionName]) -> None:
         self._available_actions = [ALL_ACTIONS[action_name] for action_name in actions]
-
-    @classmethod
-    def from_initial_user_message(cls, message_text: str) -> "Conversation":
-        return cls(messages=[Message(type=MessageType.USER, text=message_text)])
 
     def __str__(self):
         return f"{self._conversation_id} {self._messages} {self._available_actions}"

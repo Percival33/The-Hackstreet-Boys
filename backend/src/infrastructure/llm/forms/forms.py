@@ -1,29 +1,28 @@
 import json
-from dataclasses import fields
 from enum import Enum
 from typing import Union, Literal
 import logging
 from pydantic import BaseModel
 
 from src.application.generation_settings import GptGenerationSettings
-from src.domain.conversation import Conversation
+from src.domain.conversation import Conversation, MessageType
 from src.infrastructure.llm.expert.domain_expert import DomainExpert
 from src.infrastructure.llm.expert.prompts import expert_choose_responder, expert_choose_responder_system
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
 from src.infrastructure.llm.forms.prompts import forms_process_response, forms_ask_question, forms_initialize_form, \
-    forms_initialize_form_user, forms_is_individual, forms_tax_rate
+    forms_initialize_form_user, forms_is_individual
 
 logger = logging.getLogger(__name__)
 
 
 class AskQuestionSchema(BaseModel):
     message: str
-    answered_fields: list[int]
+    answered_fields: list[str]
 
 
 class ProcessedFieldSchema(BaseModel):
-    field_number: int
+    field_id: str
     field_value: Union[str, int, float, bool]
 
 
@@ -78,21 +77,25 @@ class FormsModel:
 
         return response
 
-    def ask_question(self, conversation: Conversation):
-        last_prompt = conversation.messages[-1].text
-        responder = self.choose_responder(last_prompt)
-        if responder.model == Model.EXPERT:
-            return self.expert_answer(conversation)
-        elif responder.model == Model.FORMS:
+    def ask_question(self, conversation: Conversation) -> AskQuestionSchema | str:
+        if conversation.messages[-1].type == MessageType.ASSISTANT:
             return self.form_question(conversation)
+        else:
+            responder = self.choose_responder(conversation)
 
-    def expert_answer(self, conversation: Conversation):
+            if responder.model == Model.FORMS:
+                return self.form_question(conversation)
+            elif responder.model == Model.EXPERT:
+                return self.expert_answer(conversation)
+
+    def expert_answer(self, conversation: Conversation) -> str:
         domain_expert = DomainExpert(self.language)
         return domain_expert.respond(conversation, 5)
 
-    @staticmethod
-    def choose_responder(prompt: str):
+    def choose_responder(self, conversation: Conversation) -> ChooseModelSchema:
+        prompt = conversation.messages[-1].text
         logger.info(f"Choosing responder for prompt: {prompt}")
+
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
@@ -101,7 +104,7 @@ class FormsModel:
         creator.add(
             user=prompt,
             assistant=expert_choose_responder(),
-            system=expert_choose_responder_system()
+            system=expert_choose_responder_system(self.get_conversation_history(conversation))
         )
         response = gpt_client.response(
             messages=creator.messages,
@@ -112,7 +115,7 @@ class FormsModel:
         response = ChooseModelSchema(**response)
         return response
 
-    def form_question(self, conversation: Conversation):
+    def form_question(self, conversation: Conversation) -> AskQuestionSchema:
         schema = conversation.form.get_remaining_fields()
         schema_str = self.parse_schema(schema)
         creator = GptPromptCreator()
@@ -121,7 +124,7 @@ class FormsModel:
             response_format=AskQuestionSchema
         )
         creator.add(
-            user=self.get_conversation_history(conversation),
+            # user=self.get_conversation_history(conversation),
             assistant=forms_ask_question(self.language),
             system=schema_str
         )
@@ -136,6 +139,8 @@ class FormsModel:
         return response
 
     def process_response(self, conversation: Conversation) -> FieldFillSchema:
+        schema = conversation.form.get_remaining_fields()
+        schema_str = self.parse_schema(schema)
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
@@ -144,7 +149,7 @@ class FormsModel:
         creator.add(
             user=conversation.messages[-1].text,
             assistant=forms_process_response(),
-            system=self.get_conversation_history(conversation)
+            system=schema_str
         )
 
         response = gpt_client.response(
@@ -177,8 +182,8 @@ class FormsModel:
         response = IsIndividualSchema(**response)
         return response
 
-    def tax_rate(self, conversation: Conversation) -> float:
-        possible_values = [0.05, 0.1, 0.2]
+    def tax_rate(self, conversation: Conversation) -> str:
+        possible_values = ["0.5", "1", "2"]
         gpt_client = GptClient()
 
         response = gpt_client.assistant_response(
@@ -187,11 +192,8 @@ class FormsModel:
             assistant_id='asst_AazFHWo1StCE7J2MqRHtYFvh',
             temperature=0.2,
         )
-        response = float(response)
-        if response > 1:
-            response = response / 10
         if response not in possible_values:
-            return 0.2
+            return "2"
         return response
 
     @staticmethod
