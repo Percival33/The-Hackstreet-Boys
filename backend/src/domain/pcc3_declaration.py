@@ -33,7 +33,7 @@ class PCC3Declaration:
 	pesel: str | None = field(metadata={"id": "PESEL"}, default=None)
 	imie_pierwsze: str | None = field(metadata={"id": "ImiePierwsze", "opis": "Pierwsze imie"}, default=None)
 	nazwisko: str | None = field(metadata={"id": "Nazwisko"}, default=None)
-	data_urodzenia: str | None = field(metadata={"id": "DataUrodzenia"}, default=None)
+	data_urodzenia: str | None = field(metadata={"id": "DataUrodzenia", "opis": "Data urodzenia"}, default=None)
 
 	# NIEFIZYCZNA
 	nip: str | None = field(metadata={"id": "NIP"}, default=None)
@@ -45,8 +45,8 @@ class PCC3Declaration:
 	powiat: str | None = field(metadata={"id": "Powiat"}, default=None)
 	gmina: str | None = field(metadata={"id": "Gmina"}, default=None)
 	ulica: str | None = field(metadata={"id": "Ulica"}, default=None)
-	nr_domu: str | None = field(metadata={"id": "NrDomu"}, default=None)
-	nr_lokalu: str | None = field(metadata={"id": "NrLokalu"}, default=None)
+	nr_domu: str | None = field(metadata={"id": "NrDomu", "opis": "Numer domu"}, default=None)
+	nr_lokalu: str | None = field(metadata={"id": "NrLokalu", "opis": "Numer lokalu"}, default=None)
 	miejscowosc: str | None = field(metadata={"id": "Miejscowosc"}, default=None)
 	kod_pocztowy: str | None = field(metadata={"id": "KodPocztowy", "opis": "Kod pocztowy w formacie NN-NNN"}, default=None)
 
