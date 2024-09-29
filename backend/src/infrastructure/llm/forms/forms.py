@@ -189,7 +189,7 @@ class FormsModel:
         response = gpt_client.assistant_response(
             prompt='Determine tax rate based on your knowledge',
             context=self.get_conversation_history(conversation),
-            assistant_id='asst_AazFHWo1StCE7J2MqRHtYFvh',
+            assistant_id='asst_ZtTe7v9whhliZWQX9xOQewyn',
             temperature=0.2,
         )
         if response not in possible_values:
