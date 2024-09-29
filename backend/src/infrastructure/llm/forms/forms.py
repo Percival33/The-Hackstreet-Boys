@@ -81,8 +81,7 @@ class FormsModel:
         if conversation.messages[-1].type == MessageType.ASSISTANT:
             return self.form_question(conversation)
         else:
-            last_prompt = conversation.messages[-1].text
-            responder = self.choose_responder(last_prompt)
+            responder = self.choose_responder(conversation)
 
             if responder.model == Model.FORMS:
                 return self.form_question(conversation)
@@ -93,9 +92,10 @@ class FormsModel:
         domain_expert = DomainExpert(self.language)
         return domain_expert.respond(conversation, 5)
 
-    @staticmethod
-    def choose_responder(prompt: str) -> ChooseModelSchema:
+    def choose_responder(self, conversation: Conversation) -> ChooseModelSchema:
+        prompt = conversation.messages[-1].text
         logger.info(f"Choosing responder for prompt: {prompt}")
+
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
@@ -104,7 +104,7 @@ class FormsModel:
         creator.add(
             user=prompt,
             assistant=expert_choose_responder(),
-            system=expert_choose_responder_system()
+            system=expert_choose_responder_system(self.get_conversation_history(conversation))
         )
         response = gpt_client.response(
             messages=creator.messages,
@@ -139,6 +139,8 @@ class FormsModel:
         return response
 
     def process_response(self, conversation: Conversation) -> FieldFillSchema:
+        schema = conversation.form.get_remaining_fields()
+        schema_str = self.parse_schema(schema)
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
@@ -147,7 +149,7 @@ class FormsModel:
         creator.add(
             user=conversation.messages[-1].text,
             assistant=forms_process_response(),
-            system=self.get_conversation_history(conversation)
+            system=schema_str
         )
 
         response = gpt_client.response(

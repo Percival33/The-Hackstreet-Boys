@@ -16,6 +16,7 @@ def expert_choose_responder():
 Forms:
 - help user fill out next field in form
 - must be used when user provided information requested by the assistant
+- must be used when user answers the question asked by the assistant
 
 Expert:
 - must be used when user asks question which is not related to filling the form
@@ -25,6 +26,5 @@ I choose only between these two models based on the user prompt.
 '''
 
 
-def expert_choose_responder_system():
-    return '''I choose between two models: 'expert' and 'forms' based on user prompt. I will only choose between two models: 'expert' and 'forms'
-'''
+def expert_choose_responder_system(conversation_history: str):
+    return f'''I choose between two models: 'expert' and 'forms' based on user prompt. I will only choose between two models: 'expert' and 'forms\n\nConversation history: {conversation_history}'''
