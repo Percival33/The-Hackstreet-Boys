@@ -189,7 +189,7 @@ class FormsModel:
         )
         response = float(response)
         if response > 1:
-            response = response / 10
+            response = response / 100
         if response not in possible_values:
             return 0.2
         return response
