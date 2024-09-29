@@ -1,5 +1,7 @@
 import json
 import logging
+from enum import Enum
+
 from pydantic import BaseModel
 from src.application.generation_settings import GptGenerationSettings
 from src.domain.action import ActionName, Action
@@ -28,6 +30,11 @@ class TriageModelResponse(BaseModel):
     response: str
 
 
+class TriageExpert(Enum):
+    DOMAIN = 'DOMAIN'
+    SYSTEM = 'SYSTEM'
+
+
 class Triage:
     def __init__(
             self,
@@ -40,6 +47,24 @@ class Triage:
             self,
             conversation: Conversation,
             depth: int = 0
+    ) -> TriageStepResponse:
+        # creator = GptPromptCreator()
+        # creator.add_from_conversation(conversation.messages)
+
+        # domain_expert = DomainExpert(self.language)
+
+        # if choose_expert(conversation) == Expert.
+        return self.prompt_user(conversation)
+
+    def choose_expert(
+            self,
+            conversation: Conversation
+    ) -> TriageStepResponse:
+        pass
+
+    def prompt_user(
+            self,
+            conversation: Conversation
     ) -> TriageStepResponse:
         creator = GptPromptCreator()
         creator.add_from_conversation(conversation.messages)

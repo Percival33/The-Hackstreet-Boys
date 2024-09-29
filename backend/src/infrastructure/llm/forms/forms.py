@@ -78,15 +78,16 @@ class FormsModel:
         return response
 
     def ask_question(self, conversation: Conversation) -> AskQuestionSchema | str:
-        last_prompt = None
-        if conversation.messages[-1].type == MessageType.USER:
+        if conversation.messages[-1].type == MessageType.ASSISTANT:
+            return self.form_question(conversation)
+        else:
             last_prompt = conversation.messages[-1].text
             responder = self.choose_responder(last_prompt)
 
-        if last_prompt is None or responder.model == Model.FORMS:
-            return self.form_question(conversation)
-        elif responder.model == Model.EXPERT:
-            return self.expert_answer(conversation)
+            if responder.model == Model.FORMS:
+                return self.form_question(conversation)
+            elif responder.model == Model.EXPERT:
+                return self.expert_answer(conversation)
 
     def expert_answer(self, conversation: Conversation) -> str:
         domain_expert = DomainExpert(self.language)

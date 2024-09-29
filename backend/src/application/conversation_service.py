@@ -37,7 +37,7 @@ class ConversationService:
         result = self._forms_model.ask_question(conversation)
 
         conversation.append_message(Message(
-            MessageType=MessageType.ASSISTANT,
+            type=MessageType.ASSISTANT,
             text=result.message
         ))
 

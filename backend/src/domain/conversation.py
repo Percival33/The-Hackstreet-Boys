@@ -7,6 +7,7 @@ import pydantic
 from src.domain.action import ActionName, ALL_ACTIONS, Action
 from src.domain.pcc3_declaration import PCC3Declaration
 
+
 class MessageType(StrEnum):
     USER = "USER"
     SYSTEM = "SYSTEM"
@@ -87,6 +88,7 @@ class Conversation:
     @property
     def xml(self) -> str | None:
         return self._generated_xml
+
     def set_form(self, new_form: PCC3Declaration) -> None:
         self._pcc3_form = new_form
 
