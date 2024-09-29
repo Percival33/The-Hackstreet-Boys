@@ -34,7 +34,7 @@ class PCC3Declaration:
 	kod_pocztowy: str | None = field(metadata={"id": "KodPocztowy"}, default=None)
 
 	# SZCZEGOLY
-	podmiot: int | None = field(metadata={"id": "P_7", "opis": "Podmiot składający deklarację"}, default=None)
+	podmiot: int | None = field(metadata={"id": "P_7", "opis": "Podmiot składający deklarację: 1 - podmiot zobowiązany solidarnie do zapłaty podatku, 5 - inny podmiot"}, default=None)
 	przedmiot_opadatkowania: int | None = field(metadata={"id": "P_20",
 														  "opis": "Przedmiot opodatkowania : 1 - umowa, 2 - zmiana umowy, 3 - orzeczenie sądu lub ugoda, 4 - inne"},
 												default=None)
