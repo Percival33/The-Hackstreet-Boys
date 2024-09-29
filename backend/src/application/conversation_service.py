@@ -21,11 +21,11 @@ class ConversationService:
         self._form_serialzier = form_serialization
         self._forms_model = forms_model
 
-    def process(self, conversation: Conversation) -> None | str:
+    def process(self, conversation: Conversation) -> None:
         if conversation.status == ConversationStatus.FORM:
             self._process_form(conversation)
         elif conversation.status == ConversationStatus.GENERATION:
-            return self._generate_form(conversation)
+            self._generate_form(conversation)
         else:
             self._process_triage(conversation)
 
@@ -33,7 +33,9 @@ class ConversationService:
         self._forms_model.ask_question(conversation)
 
     def _generate_form(self, conversation: Conversation):
-        return self._form_serialzier.serialize_pcc3(conversation.form)
+        if not conversation.xml:
+            xml = self._form_serialzier.serialize_pcc3(conversation.form)
+            conversation.set_xml(xml)
 
     def _process_triage(self, conversation: Conversation) -> None:
         result = self._triage_service.step(conversation)
