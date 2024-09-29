@@ -14,7 +14,7 @@ class PCC3Declaration:
 
 	# FIZYCZNA
 	pesel: str | None = field(metadata={"id": "PESEL"}, default=None)
-	imie_pierwsze: str | None = field(metadata={"id": "ImiePierwsze"}, default=None)
+	imie_pierwsze: str | None = field(metadata={"id": "ImiePierwsze", "opis": "Pierwsze imie"}, default=None)
 	nazwisko: str | None = field(metadata={"id": "Nazwisko"}, default=None)
 	data_urodzenia: str | None = field(metadata={"id": "DataUrodzenia"}, default=None)
 
