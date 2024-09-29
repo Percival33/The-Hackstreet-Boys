@@ -46,8 +46,8 @@ class Triage:
             conversation: Conversation,
     ) -> TriageStepResponse | bool:
         last_message = conversation.messages[-1].text
-        if not verify(last_message):
-            return False
+        # if not verify(last_message):
+        #     return False
         creator = GptPromptCreator()
         creator.add_from_conversation(conversation.messages)
         current_actions = conversation.available_actions
