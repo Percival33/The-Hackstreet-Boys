@@ -56,7 +56,7 @@ class PCC3Declaration:
 	@property
 	def obliczony_podatek_czynnosci_p05(self) -> int:
 		"""
-		P_41
+		P_50
 		:return: Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 0.5%)
 		"""
 		val = self.podstawa_opodatkowania_p05 or 0.0
@@ -137,9 +137,9 @@ class PCC3Declaration:
 			if self.procent_podatku is not None:
 				if self.procent_podatku=='0.5' and _id in ['P_26', 'P_24']:
 					continue
-				if self.procent_podatku=='1' and _id in ['P_26', 'P_40']:
+				if self.procent_podatku=='1' and _id in ['P_26', 'P_49']:
 					continue
-				if self.procent_podatku=='2' and _id in ['P_24', 'P_40']:
+				if self.procent_podatku=='2' and _id in ['P_24', 'P_49']:
 					continue
 
 			description = f.metadata.get("opis")
