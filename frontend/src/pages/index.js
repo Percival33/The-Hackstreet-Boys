@@ -42,7 +42,9 @@ const [entireResponses, setEntireResponses] = useState([]);
   useEffect(() => {
     const fetchConversations = async () => {
       try {
-        const foo = await axios.get('http://95.217.184.211:8080/all_conversations');
+        // const foo = await axios.get('http://95.217.184.211:8080/all_conversations');
+        const foo = await axios.get('https://www.asystentpodatkowyai.pl/api/all_conversations');
+
         setEntireResponses(foo.data);
       } catch (error) {
         console.error('Error fetching conversations:', error);
