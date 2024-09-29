@@ -42,7 +42,7 @@ class ConversationResponse(BaseResponse):
                 ) for message in conversation.messages
             ],
             form={
-                field_.metadata.get("id", ""): getattr(conversation.form, field_.name)
+                field_.name: getattr(conversation.form, field_.name)
                 for field_ in fields(conversation.form)
                 if field_.metadata.get("id", "") not in hidden_fields
             },
