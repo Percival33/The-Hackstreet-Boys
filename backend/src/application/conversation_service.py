@@ -96,6 +96,8 @@ class ConversationService:
 
             self._process_form(conversation, False)
 
+        self._repo.save(conversation)
+
     @staticmethod
     def _update_schema(conversation: Conversation, update_with: FieldFillSchema):
         form_dict = dataclasses.asdict(conversation.form)
