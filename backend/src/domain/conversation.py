@@ -98,6 +98,9 @@ class Conversation:
     def finish_triage(self):
         self._status = ConversationStatus.FORM
 
+    def finish_form_processing(self):
+        self._status = ConversationStatus.GENERATION
+
     def set_xml(self, xml):
         self._generated_xml = xml
 

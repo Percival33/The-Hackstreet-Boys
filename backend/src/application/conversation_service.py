@@ -39,6 +39,11 @@ class ConversationService:
             print(update_with)
             self._update_schema(conversation, update_with)
 
+        if len(conversation.form.get_remaining_fields()) == 0:
+            conversation.finish_form_processing()
+            self._repo.save(conversation)
+            return
+
         result = self._forms_model.ask_question(conversation)
 
         conversation.append_message(Message(
