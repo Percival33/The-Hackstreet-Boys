@@ -105,9 +105,15 @@ class ConversationService:
         form_dict = dataclasses.asdict(conversation.form)
 
         for field in update_with.fields:
+            if field.field_id == "nazwa_urzedu_skarbowego":
+                field.field_id = "kod_urzedu_skarbowego"
+
             form_dict[field.field_id] = field.field_value
 
             if field.field_id in ["kod_urzedu_skarbowego"]:
                 form_dict[field.field_id] = self._forms_model.swap_for_enum(field.field_value)
 
-        conversation.set_form(PCC3Declaration(**form_dict))
+        try:
+            conversation.set_form(PCC3Declaration(**form_dict))
+        except Exception as e:
+            logger.error(e)
