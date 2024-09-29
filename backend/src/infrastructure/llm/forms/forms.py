@@ -218,6 +218,8 @@ class FormsModel:
 
             if field.rule:
                 schema_str += f"Reguła: {field.rule}\n"
+            if field.error:
+                schema_str +=f'Błędy wczesniejszego wypełnienia: {field.error}'
 
             schema_str += "\n"
         return schema_str
@@ -231,4 +233,7 @@ class FormsModel:
             assistant_id=assistant_id,
             temperature=.5
         )
-        return res
+        if len(res) == 4:
+            return res
+        else:
+            return '1435'  # remove default value
