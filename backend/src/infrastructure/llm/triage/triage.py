@@ -85,8 +85,8 @@ class Triage:
                 response_format=TriageStepResponse
             )
             creator.add(
-                system=triage_step_response(self.language),
-                assistant=triage_step_response_system(actions_str, context_str)
+                assistant=triage_step_response(self.language),
+                system=triage_step_response_system(actions_str, context_str)
             )
             response = self.gpt_client.response(
                 messages=creator.messages,

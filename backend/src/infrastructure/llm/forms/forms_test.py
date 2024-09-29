@@ -33,8 +33,6 @@ Reguła: podmiot składający deklarację jest równy: 1 (podmiot zobowiązany s
 podatku) lub 5 (inny podmiot)
 P7=1 LUB P7=5'''
 
-schema = {}
-
 conversation = Conversation()
 messages = [
     Message(
@@ -49,7 +47,9 @@ for message in messages:
     conversation.append_message(message)
 
 if __name__ == '__main__':
-    # res = forms.is_individual(conversation)
+    res = forms.is_individual(conversation)
+    print(res)
     res = forms.tax_rate(conversation)
-    # res = forms.ask_question(schema, conversation)
+    print(res)
+    res = forms.ask_question(conversation)
     print(res)

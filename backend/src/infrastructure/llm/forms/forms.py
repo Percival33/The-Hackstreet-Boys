@@ -1,18 +1,17 @@
 import json
-from dataclasses import fields
 from enum import Enum
 from typing import Union, Literal
 import logging
 from pydantic import BaseModel
 
 from src.application.generation_settings import GptGenerationSettings
-from src.domain.conversation import Conversation
+from src.domain.conversation import Conversation, MessageType
 from src.infrastructure.llm.expert.domain_expert import DomainExpert
 from src.infrastructure.llm.expert.prompts import expert_choose_responder, expert_choose_responder_system
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
 from src.infrastructure.llm.forms.prompts import forms_process_response, forms_ask_question, forms_initialize_form, \
-    forms_initialize_form_user, forms_is_individual, forms_tax_rate
+    forms_initialize_form_user, forms_is_individual
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +22,7 @@ class AskQuestionSchema(BaseModel):
 
 
 class ProcessedFieldSchema(BaseModel):
-    field_number: int
+    field_id: str
     field_value: Union[str, int, float, bool]
 
 
@@ -79,12 +78,15 @@ class FormsModel:
         return response
 
     def ask_question(self, conversation: Conversation) -> AskQuestionSchema | str:
-        last_prompt = conversation.messages[-1].text
-        responder = self.choose_responder(last_prompt)
-        if responder.model == Model.EXPERT:
-            return self.expert_answer(conversation)
-        elif responder.model == Model.FORMS:
+        last_prompt = None
+        if conversation.messages[-1].type == MessageType.USER:
+            last_prompt = conversation.messages[-1].text
+            responder = self.choose_responder(last_prompt)
+
+        if last_prompt is None or responder.model == Model.FORMS:
             return self.form_question(conversation)
+        elif responder.model == Model.EXPERT:
+            return self.expert_answer(conversation)
 
     def expert_answer(self, conversation: Conversation) -> str:
         domain_expert = DomainExpert(self.language)
@@ -121,7 +123,7 @@ class FormsModel:
             response_format=AskQuestionSchema
         )
         creator.add(
-            user=self.get_conversation_history(conversation),
+            # user=self.get_conversation_history(conversation),
             assistant=forms_ask_question(self.language),
             system=schema_str
         )
