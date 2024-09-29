@@ -54,3 +54,13 @@ def form_completion(
     conversation_service.process(conversation)
 
     return ConversationResponse.from_conversation(conversation)
+
+
+@router.get("/all_conversations", response_model=list[ConversationResponse])
+@inject
+def get_all_conversations(
+        conversation_repo: ConversationRepository = Depends(Provide[Container.conversation_repository]),
+) -> list[ConversationResponse]:
+    return [
+        ConversationResponse.from_conversation(conversation) for conversation in conversation_repo.find_all()
+    ]
