@@ -49,7 +49,7 @@ class PCC3Declaration:
 		default=None)
 
 	# 0.5%
-	podstawa_opodatkowania_p05: int | None = field(metadata={"id": "P_40",
+	podstawa_opodatkowania_p05: int | None = field(metadata={"id": "P_49",
 															"opis": "Podstawa opodatkowania(opodatkowana wg stawki podatku 0.5%) określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"},
 												  default=None)
 
