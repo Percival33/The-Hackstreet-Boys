@@ -18,23 +18,29 @@ class MongoConversationRepository(ConversationRepository):
     def __init__(self, mongo_client: MongoClient) -> None:
         self._mongo_client = mongo_client
         self._db = self._mongo_client[settings.mongo.db_name]
-        self._notes = self._db[self._COLLECTION_NAME]
+        self._conversations = self._db[self._COLLECTION_NAME]
 
     def save(self, conversation: Conversation):
         logger.info("Saving conversation %s", conversation.id)
 
-        self._notes.update_one(
+        self._conversations.update_one(
             {"conversation_id": conversation.id.value},
             {"$set": conversation.__dict__()},
             upsert=True,
         )
 
     def find(self, conversation_id: ConversationId) -> Conversation | None:
-        conversation = self._notes.find_one({"conversation_id": conversation_id.value})
+        conversation = self._conversations.find_one({"conversation_id": conversation_id.value})
         if not conversation:
             return None
 
         return self._map_collection_to_conversation(conversation)
+
+    def find_all(self) -> list[Conversation]:
+        all_conversations = self._conversations.find({})
+        return [
+            self._map_collection_to_conversation(conversation) for conversation in all_conversations
+        ]
 
     @staticmethod
     def _map_collection_to_conversation(collection: Mapping[str, Any]) -> Conversation:

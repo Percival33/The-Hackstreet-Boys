@@ -2,7 +2,6 @@ import uvicorn
 
 from src.infrastructure.settings import settings
 
-
 if __name__ == "__main__":
     uvicorn.run(
         app="src.infrastructure.api.app:app",

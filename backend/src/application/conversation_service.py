@@ -8,15 +8,13 @@ from src.infrastructure.llm.triage.triage import Triage
 from src.application.form_serializer import FormSerializer
 
 
-
-
 class ConversationService:
     def __init__(
-        self,
-        conversations_repo: ConversationRepository,
-        triage_service: Triage,
-        form_serialization: FormSerializer,
-        forms_model: FormsModel,
+            self,
+            conversations_repo: ConversationRepository,
+            triage_service: Triage,
+            form_serialization: FormSerializer,
+            forms_model: FormsModel,
     ):
         self._repo = conversations_repo
         self._triage_service = triage_service

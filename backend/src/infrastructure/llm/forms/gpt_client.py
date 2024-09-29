@@ -12,7 +12,6 @@ class GptClient(LlmClient):
     def __init__(self):
         super().__init__()
         self.client = OpenAI(api_key=settings.openai_api_key)
-        self.creator = GptPromptCreator()
 
     def stream_response(
             self,

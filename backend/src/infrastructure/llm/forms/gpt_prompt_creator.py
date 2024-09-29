@@ -21,16 +21,16 @@ class GptPromptCreator(PromptCreator):
                 'content': system
             })
 
-        if user is not None and user != '':
-            self.messages.append({
-                'role': 'user',
-                'content': user
-            })
-
         if assistant is not None and assistant != '':
             self.messages.append({
                 'role': 'assistant',
                 'content': assistant
+            })
+
+        if user is not None and user != '':
+            self.messages.append({
+                'role': 'user',
+                'content': user
             })
 
     def add_prebuilt(self, messages: Iterable[dict]):

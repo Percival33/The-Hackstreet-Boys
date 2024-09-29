@@ -11,3 +11,7 @@ class ConversationRepository(abc.ABC):
     @abc.abstractmethod
     def find(self, conversation_id: ConversationId) -> Conversation:
         pass
+
+    @abc.abstractmethod
+    def find_all(self) -> list[Conversation]:
+        pass
