@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import emblem from '../../../images/national-emblem.svg';
 
 
-// background-color:#0052a5;
-// Define a styled header component
 const HeaderContainer = styled.header`
   background-color:#fff;
   padding: 20px;
@@ -24,7 +22,6 @@ const HeaderContainer = styled.header`
   height:80px;
 `;
 
-// Define a styled title component
 const Title = styled.h1`
   font-size: 20px;
   margin: 0;
@@ -33,7 +30,7 @@ const Title = styled.h1`
   font-weight:bold;
 `;
 
-// Define the Header component
+
 const Header = props => {
   return (
     <HeaderContainer>
