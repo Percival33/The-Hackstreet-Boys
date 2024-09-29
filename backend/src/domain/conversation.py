@@ -102,10 +102,6 @@ class Conversation:
     def set_available_actions(self, actions: list[ActionName]) -> None:
         self._available_actions = [ALL_ACTIONS[action_name] for action_name in actions]
 
-    @classmethod
-    def from_initial_user_message(cls, message_text: str) -> "Conversation":
-        return cls(messages=[Message(type=MessageType.USER, text=message_text)])
-
     def __str__(self):
         return f"{self._conversation_id} {self._messages} {self._available_actions}"
 

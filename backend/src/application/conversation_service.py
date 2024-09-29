@@ -34,10 +34,14 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation) -> None:
-        res = self._forms_model.ask_question(conversation)
-        print(res)
-        # self._repo.save(conversation)
-        pass
+        result = self._forms_model.ask_question(conversation)
+
+        conversation.append_message(Message(
+            MessageType=MessageType.ASSISTANT,
+            text=result.message
+        ))
+
+        self._repo.save(conversation)
 
     def _generate_form(self, conversation: Conversation):
         if not conversation.xml:
@@ -82,5 +86,3 @@ class ConversationService:
             conversation.set_form(PCC3Declaration(**form_dict))
 
             self._process_form(conversation)
-
-        self._repo.save(conversation)
