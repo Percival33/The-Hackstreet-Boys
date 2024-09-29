@@ -18,7 +18,7 @@ const CardContainer = styled.div`
   align-items: center;
 
   
-  
+  opacity:${props=>props.visible===true ? '1' : '0'};
   &:hover {
     transform: translateY(-5px); /* Lift on hover */
     cursor:pointer;
@@ -39,10 +39,10 @@ const CardContent = styled.p`
   line-height: 1.6;
 `;
 
-const Card = ({ title, content,setInputValue }) => {
+const Card = (props,{ title, content,setInputValue }) => {
   return (
-    <CardContainer onClick={()=> setInputValue(content)}>
-      <CardContent>{content}</CardContent>
+    <CardContainer onClick={()=> props.setInputValue(props.content)} visible={props.visible}>
+      <CardContent>{props.content}</CardContent>
     </CardContainer>
   );
 };
