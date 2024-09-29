@@ -104,5 +104,5 @@ class PCC3Declaration:
 					continue
 
 			description = f.metadata.get("opis")
-			unfilled_fields.append(RemainingField(_id, description))
+			unfilled_fields.append(RemainingField(f.name, description))
 		return unfilled_fields
