@@ -231,4 +231,7 @@ class FormsModel:
             assistant_id=assistant_id,
             temperature=.5
         )
-        return res
+        if len(res) == 4:
+            return res
+        else:
+            return '1435'  # remove default value
