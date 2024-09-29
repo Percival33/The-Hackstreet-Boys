@@ -221,3 +221,11 @@ class FormsModel:
 
             schema_str += "\n"
         return schema_str
+
+    @staticmethod
+    def swap_for_enum(value: str) -> str:
+        client = GptClient()
+
+        client.assistant_response(
+            prompt=value
+        )
