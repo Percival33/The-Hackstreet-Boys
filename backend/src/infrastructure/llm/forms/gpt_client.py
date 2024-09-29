@@ -81,6 +81,7 @@ class GptClient(LlmClient):
             instructions=prompt,
             temperature=temperature
         )
+
         while run.status != 'completed':
             time.sleep(1)
         messages = self.client.beta.threads.messages.list(

@@ -83,7 +83,6 @@ class FormsModel:
             return self.form_question(conversation)
         else:
             responder = self.choose_responder(conversation)
-
             if responder.model == Model.FORMS:
                 return self.form_question(conversation)
             elif responder.model == Model.EXPERT:
@@ -124,7 +123,8 @@ class FormsModel:
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
-            response_format=AskQuestionSchema
+            response_format=AskQuestionSchema,
+            temperature=0.7
         )
         creator.add(
             user=self.get_conversation_history(conversation),
@@ -147,7 +147,8 @@ class FormsModel:
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
-            response_format=FieldFillSchema
+            response_format=FieldFillSchema,
+            temperature=0.7
         )
         creator.add(
             user=self.get_conversation_history(conversation),
@@ -219,7 +220,7 @@ class FormsModel:
             if field.rule:
                 schema_str += f"Reguła: {field.rule}\n"
             if field.error:
-                schema_str +=f'Błędy wczesniejszego wypełnienia: {field.error}'
+                schema_str += f'Błędy wczesniejszego wypełnienia: {field.error}'
 
             schema_str += "\n"
         return schema_str
