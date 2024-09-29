@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 from src.domain.action import ALL_ACTIONS
 from src.domain.conversation import Conversation, Message
-from src.infrastructure.llm.forms.initialize_form_test import conversation
 
 
 class BaseResponse(BaseModel):
@@ -33,7 +32,7 @@ class ConversationResponse(BaseResponse):
                 MessageResponse(
                     type=message.type,
                     text=message.text,
-                    choices=message.choices,
+                    choices=message.choices[:4],
                     action_to_perform={
                         "name": message.action_to_perform.name,
                         "description": ALL_ACTIONS[message.action_to_perform].user_description,
