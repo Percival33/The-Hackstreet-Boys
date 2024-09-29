@@ -218,6 +218,8 @@ class FormsModel:
 
             if field.rule:
                 schema_str += f"Reguła: {field.rule}\n"
+            if field.error:
+                schema_str +=f'Błędy wczesniejszego wypełnienia: {field.error}'
 
             schema_str += "\n"
         return schema_str
