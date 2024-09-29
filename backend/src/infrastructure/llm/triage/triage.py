@@ -1,14 +1,11 @@
 import json
 import logging
-from enum import Enum
 
 from pydantic import BaseModel
 from src.application.generation_settings import GptGenerationSettings
 from src.domain.action import ActionName, Action
 from src.domain.conversation import Conversation
 from src.infrastructure.llm.expert.domain_expert import DomainExpert
-from src.infrastructure.llm.expert.prompts import expert_choose_responder, expert_choose_responder_system
-from src.infrastructure.llm.forms.forms import ChooseModelSchema, Model
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
 from src.infrastructure.llm.prompt_verifier import verify
@@ -122,6 +119,3 @@ class Triage:
             res += f'{action.description}\n'
             res += f'-----------------------\n'
         return res
-
-    def __rollback(self):
-        pass
