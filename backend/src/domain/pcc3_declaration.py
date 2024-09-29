@@ -48,6 +48,13 @@ class PCC3Declaration:
 		metadata={"id": "P_23", "opis": "Zwięzłe określenie treści i przedmiotu czynności cywilnoprawnej"},
 		default=None)
 
+	# 0.5%
+	podstawa_opodatkowania_p05: int | None = field(metadata={"id": "P_40",
+															"opis": "Podstawa opodatkowania(opodatkowana wg stawki podatku 0.5%) określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"},
+												  default=None)
+	obliczony_podatek_czynnosci_p05: int | None = field(metadata={"id": "p_41",
+																 "opis": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 0.5%)"},
+													   default=None)
 	# 1%
 	podstawa_opodatkowania_p1: int | None = field(metadata={"id": "P_24",
 															"opis": "Podstawa opodatkowania(opodatkowana wg stawki podatku 1%) określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"},
@@ -81,7 +88,7 @@ class PCC3Declaration:
 			if value is not None:
 				continue
 			_id = f.metadata.get("id", f.name)
-			if _id in ['P_27', 'P_25', 'P_46', 'P_53', 'P_62']:
+			if _id in ['P_27', 'P_25', 'P_46', 'P_53', 'P_62', 'P_41']:
 				continue
 			if self.czy_fizyczna is not None:
 				if self.czy_fizyczna and _id in ['NIP', 'PelnaNazwa', 'SkroconaNazwa']:
@@ -89,9 +96,11 @@ class PCC3Declaration:
 				if not self.czy_fizyczna and _id in ['PESEL', 'ImiePierwsze', 'Nazwisko', 'DataUrodzenia']:
 					continue
 			if self.procent_podatku is not None:
-				if self.procent_podatku=='1' and _id in ['P_26', 'P_27']:
+				if self.procent_podatku=='0.5' and _id in ['P_26', 'P_27', 'P_24', 'P_25']:
 					continue
-				if self.procent_podatku=='2' and _id in ['P_24', 'P_25']:
+				if self.procent_podatku=='1' and _id in ['P_26', 'P_27', 'P_40', 'P_41']:
+					continue
+				if self.procent_podatku=='2' and _id in ['P_24', 'P_25', 'P_40', 'P_41']:
 					continue
 
 			description = f.metadata.get("opis", "Brak opisu")
