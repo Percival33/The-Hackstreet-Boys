@@ -1,3 +1,4 @@
+import time
 from typing import Iterable, Generator
 
 from openai import OpenAI
@@ -60,3 +61,30 @@ class GptClient(LlmClient):
 
     def triage_preset(self):
         pass
+
+    def assistant_response(
+            self,
+            prompt: str,
+            assistant_id: str,
+            context: str | None = None,
+            temperature: float = 1.0
+    ):
+        thread = self.client.beta.threads.create()
+        if context is not None:
+            self.client.beta.threads.messages.create(
+                thread_id=thread.id,
+                role="assistant",
+                content=context + "\n" + "REMEMBER TO OUTPUT SINGLE FLOAT VALUE",
+            )
+        run = self.client.beta.threads.runs.create_and_poll(
+            thread_id=thread.id,
+            assistant_id=assistant_id,
+            instructions=prompt,
+            temperature=temperature
+        )
+        while run.status != 'completed':
+            time.sleep(1)
+        messages = self.client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+        return list(messages)[0].content[0].text.value

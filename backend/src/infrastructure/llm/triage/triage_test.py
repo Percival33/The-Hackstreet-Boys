@@ -8,23 +8,23 @@ triage = Triage(
 messages = [
     Message(
         type=MessageType.USER,
-        text='Chcę wypełnić PCC',
+        text='W jaki sposób wypełnić formularz PCC-3?',
         choices=None
     ),
-    Message(
-        type=MessageType.ASSISTANT,
-        text='Jaka wersja PCC?',
-        choices=[
-            'PCC-1',
-            'PCC-2',
-            'PCC-3'
-        ]
-    ),
-    Message(
-        type=MessageType.USER,
-        text='PCC-3',
-        choices=None
-    ),
+    # Message(
+    #     type=MessageType.ASSISTANT,
+    #     text='Jaka wersja PCC?',
+    #     choices=[
+    #         'PCC-1',
+    #         'PCC-2',
+    #         'PCC-3'
+    #     ]
+    # ),
+    # Message(
+    #     type=MessageType.USER,
+    #     text='PCC-3. Podaj mi więcej informacji czym jest PCC-3 i jak go wypełnić',
+    #     choices=None
+    # ),
 ]
 
 if __name__ == '__main__':

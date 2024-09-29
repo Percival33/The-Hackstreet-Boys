@@ -39,14 +39,17 @@ conversation = Conversation()
 messages = [
     Message(
         type=MessageType.USER,
-        text='Jak zapłacić podatek rolny?',
+        text='Chce sprzedać samochód?',
         choices=None
     ),
+
 ]
 
 for message in messages:
     conversation.append_message(message)
 
 if __name__ == '__main__':
-    res = forms.ask_question(schema, conversation)
+    # res = forms.is_individual(conversation)
+    res = forms.tax_rate(conversation)
+    # res = forms.ask_question(schema, conversation)
     print(res)

@@ -23,8 +23,6 @@ messages = [
 for message in messages:
     conversation.append_message(message)
 
-# conversation.
-
 if __name__ == '__main__':
     res = forms.initialize_form(conversation)
     print(res)
