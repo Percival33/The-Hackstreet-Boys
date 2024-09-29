@@ -55,17 +55,7 @@ class FormsModel:
 
         conversation_history_str = self.get_conversation_history(conversation)
 
-        schema_str = ''
-        for field in schema:
-            schema_str += f"Nazwa: {field.name}\n"
-
-            if field.description:
-                schema_str += f"Opis: {field.description}\n"
-
-            if field.rule:
-                schema_str += f"Reguła: {field.rule}\n"
-
-            schema_str += "\n"
+        schema_str = self.parse_schema(schema)
 
         creator.add(
             system=conversation_history_str,
@@ -88,19 +78,20 @@ class FormsModel:
 
         return response
 
-    def ask_question(self, schema: dict, conversation: Conversation):
+    def ask_question(self, conversation: Conversation):
         last_prompt = conversation.messages[-1].text
         responder = self.choose_responder(last_prompt)
         if responder.model == Model.EXPERT:
             return self.expert_answer(conversation)
         elif responder.model == Model.FORMS:
-            return self.form_question(schema, conversation)
+            return self.form_question(conversation)
 
     def expert_answer(self, conversation: Conversation):
         domain_expert = DomainExpert(self.language)
         return domain_expert.respond(conversation, 5)
 
-    def choose_responder(self, prompt: str):
+    @staticmethod
+    def choose_responder(prompt: str):
         logger.info(f"Choosing responder for prompt: {prompt}")
         creator = GptPromptCreator()
         gpt_client = GptClient()
@@ -123,16 +114,16 @@ class FormsModel:
 
     def form_question(self, conversation: Conversation):
         schema = conversation.form.get_remaining_fields()
-
+        schema_str = self.parse_schema(schema)
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
             response_format=AskQuestionSchema
         )
         creator.add(
-            # user=self.conversation_history,
+            user=self.get_conversation_history(conversation),
             assistant=forms_ask_question(self.language),
-            system=str(schema)
+            system=schema_str
         )
 
         response = gpt_client.response(
@@ -144,16 +135,16 @@ class FormsModel:
         response = AskQuestionSchema(**response)
         return response
 
-    def process_response(self, response: str, schema: dict) -> FieldFillSchema:
+    def process_response(self, conversation: Conversation) -> FieldFillSchema:
         creator = GptPromptCreator()
         gpt_client = GptClient()
         generation_settings = GptGenerationSettings(
             response_format=FieldFillSchema
         )
         creator.add(
-            user=response,
+            user=conversation.messages[-1].text,
             assistant=forms_process_response(),
-            system=str(schema)
+            system=self.get_conversation_history(conversation)
         )
 
         response = gpt_client.response(
@@ -202,18 +193,6 @@ class FormsModel:
         if response not in possible_values:
             return 0.2
         return response
-        # creator.add(
-        #     assistant=forms_tax_rate(),
-        #     user=self.get_conversation_history(conversation)
-        # )
-        # response = gpt_client.response(
-        #     messages=creator.messages,
-        #     generation_settings=generation_settings,
-        #     preset=[]
-        # )
-        # response = json.loads(response)
-        # response = TaxRates(response)
-        # return response.value
 
     @staticmethod
     def get_conversation_history(conversation: Conversation) -> str:
@@ -222,3 +201,18 @@ class FormsModel:
         for message in conversation_history:
             conversation_history_str += f'[{message.type.value}]\n{message.text}\n\n'
         return conversation_history_str
+
+    @staticmethod
+    def parse_schema(schema) -> str:
+        schema_str = ''
+        for field in schema:
+            schema_str += f"Nazwa: {field.name}\n"
+
+            if field.description:
+                schema_str += f"Opis: {field.description}\n"
+
+            if field.rule:
+                schema_str += f"Reguła: {field.rule}\n"
+
+            schema_str += "\n"
+        return schema_str
