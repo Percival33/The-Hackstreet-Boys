@@ -11,6 +11,7 @@ from src.infrastructure.llm.expert.prompts import expert_choose_responder, exper
 from src.infrastructure.llm.forms.forms import ChooseModelSchema, Model
 from src.infrastructure.llm.forms.gpt_client import GptClient
 from src.infrastructure.llm.forms.gpt_prompt_creator import GptPromptCreator
+from src.infrastructure.llm.prompt_verifier import verify
 from src.infrastructure.llm.triage.prompts import triage_step_action, triage_step_response_system, triage_step_response, \
     triage_step_action_system
 
@@ -43,48 +44,10 @@ class Triage:
     def step(
             self,
             conversation: Conversation,
-    ) -> TriageStepResponse:
-        # last_prompt = conversation.messages[-1].text
-        # responder = self.choose_expert(last_prompt)
-
-        # if responder.model == Model.FORMS:
-        return self.prompt_user(conversation)
-        # elif responder.model == Model.EXPERT:
-        #     return self.expert_answer(conversation)
-        # return self.prompt_user(conversation)
-
-    @staticmethod
-    def choose_expert(
-            prompt: str
-    ) -> ChooseModelSchema:
-        logger.info(f"Choosing responder for prompt: {prompt}")
-        creator = GptPromptCreator()
-        gpt_client = GptClient()
-        generation_settings = GptGenerationSettings(
-            response_format=ChooseModelSchema
-        )
-        creator.add(
-            user=prompt,
-            assistant=expert_choose_responder(),
-            system=expert_choose_responder_system()
-        )
-        response = gpt_client.response(
-            messages=creator.messages,
-            generation_settings=generation_settings,
-            preset=[]
-        )
-        response = json.loads(response)
-        response = ChooseModelSchema(**response)
-        return response
-
-    def expert_answer(self, conversation: Conversation) -> str:
-        domain_expert = DomainExpert(self.language)
-        return domain_expert.respond(conversation, 5)
-
-    def prompt_user(
-            self,
-            conversation: Conversation
-    ) -> TriageStepResponse:
+    ) -> TriageStepResponse | bool:
+        last_message = conversation.messages[-1].text
+        if not verify(last_message):
+            return False
         creator = GptPromptCreator()
         creator.add_from_conversation(conversation.messages)
         current_actions = conversation.available_actions

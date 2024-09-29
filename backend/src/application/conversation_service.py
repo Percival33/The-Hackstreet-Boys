@@ -34,6 +34,8 @@ class ConversationService:
             self._process_triage(conversation)
 
     def _process_form(self, conversation: Conversation, process_response: bool = True) -> None:
+        logger.info(f"Processing form, remaining fields: {conversation.form.get_remaining_fields()}")
+
         if process_response:
             update_with = self._forms_model.process_response(conversation)
             print(update_with)
@@ -41,6 +43,7 @@ class ConversationService:
 
         if len(conversation.form.get_remaining_fields()) == 0:
             conversation.finish_form_processing()
+            self._generate_form(conversation)
             self._repo.save(conversation)
             return
 
@@ -51,10 +54,6 @@ class ConversationService:
             text=result.message
         ))
 
-        if len(conversation.form.get_remaining_fields()) == 0:
-            conversation.finish_form_processing()
-            self._generate_form(conversation)
-
         self._repo.save(conversation)
 
     def _generate_form(self, conversation: Conversation):
@@ -64,6 +63,10 @@ class ConversationService:
 
     def _process_triage(self, conversation: Conversation) -> None:
         result = self._triage_service.step(conversation)
+        if result is False:
+            # TODO: do whatever you want
+            print("EARLY STOPPING")
+            return
         conversation.set_available_actions(result.available_actions)
 
         action_to_perform = None
@@ -98,11 +101,13 @@ class ConversationService:
 
         self._repo.save(conversation)
 
-    @staticmethod
-    def _update_schema(conversation: Conversation, update_with: FieldFillSchema):
+    def _update_schema(self, conversation: Conversation, update_with: FieldFillSchema):
         form_dict = dataclasses.asdict(conversation.form)
 
         for field in update_with.fields:
             form_dict[field.field_id] = field.field_value
+
+            if field.field_id in ["kod_urzedu_skarbowego"]:
+                form_dict[field.field_id] = self._forms_model.swap_for_enum(field.field_value)
 
         conversation.set_form(PCC3Declaration(**form_dict))

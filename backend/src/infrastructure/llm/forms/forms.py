@@ -33,6 +33,7 @@ class FieldFillSchema(BaseModel):
 class Model(Enum):
     EXPERT = "expert"
     FORMS = "forms"
+    IRRELEVANT = "irrelevant"
 
 
 class ChooseModelSchema(BaseModel):
@@ -77,7 +78,7 @@ class FormsModel:
 
         return response
 
-    def ask_question(self, conversation: Conversation) -> AskQuestionSchema | str:
+    def ask_question(self, conversation: Conversation) -> AskQuestionSchema | str | bool:
         if conversation.messages[-1].type == MessageType.ASSISTANT:
             return self.form_question(conversation)
         else:
@@ -87,6 +88,8 @@ class FormsModel:
                 return self.form_question(conversation)
             elif responder.model == Model.EXPERT:
                 return self.expert_answer(conversation)
+            elif responder.model == Model.IRRELEVANT:
+                return False
 
     def expert_answer(self, conversation: Conversation) -> str:
         domain_expert = DomainExpert(self.language)
@@ -124,7 +127,7 @@ class FormsModel:
             response_format=AskQuestionSchema
         )
         creator.add(
-            # user=self.get_conversation_history(conversation),
+            user=self.get_conversation_history(conversation),
             assistant=forms_ask_question(self.language),
             system=schema_str
         )
@@ -147,7 +150,7 @@ class FormsModel:
             response_format=FieldFillSchema
         )
         creator.add(
-            user=conversation.messages[-1].text,
+            user=self.get_conversation_history(conversation),
             assistant=forms_process_response(),
             system=schema_str
         )
@@ -218,3 +221,14 @@ class FormsModel:
 
             schema_str += "\n"
         return schema_str
+
+    @staticmethod
+    def swap_for_enum(value: str) -> str:
+        client = GptClient()
+        assistant_id = 'asst_jhOguRuVIGb7n8R80GuRFR4p'
+        res = client.assistant_response(
+            prompt=value,
+            assistant_id=assistant_id,
+            temperature=.5
+        )
+        return res

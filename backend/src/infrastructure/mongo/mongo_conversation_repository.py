@@ -51,7 +51,8 @@ class MongoConversationRepository(ConversationRepository):
             messages=[Message(
                 type=MessageType[msg["type"]],
                 text=msg["text"],
-                choices=msg["choices"]
+                choices=msg.get("choices"),
+                action_to_perform=msg.get("action_to_perform"),
             ) for msg in collection["messages"]],
             status=ConversationStatus[collection["status"]],
             available_actions=available_actions,

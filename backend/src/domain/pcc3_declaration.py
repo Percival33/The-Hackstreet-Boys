@@ -1,20 +1,37 @@
 from dataclasses import dataclass, field, fields
-from importlib.metadata import metadata
+from xsdata.models.datatype import XmlDate
 
+def validate_date(date: str) -> str | None:
+	try:
+		y, m, d = date.split('-', 2)
+		date = XmlDate(int(y), int(m), int(d))
+		if date < XmlDate(2024, 1, 1):
+			return 'Data musi być nowsza niż 2024-01-01'
+	except Exception:
+		return 'Data została podana w nieprawidłowej formie'
+	return None
+
+VALIDATION_LOGIC = {
+	'data_dokonania_czynnosci': validate_date,
+	'pesel': lambda x: 'pesel ma błędną ilość znaków' if len(x)!=11 else None
+
+}
 
 @dataclass
 class RemainingField:
 	name: str
 	description: str | None = None
 	rule: str | None = None
+	error: str | None = None
 
 @dataclass
 class PCC3Declaration:
 	kod_urzedu_skarbowego: str | None = field(metadata={"id": "KodUrzedu"}, default=None)
+	data_dokonania_czynnosci: str | None = field(metadata={"id": "Data", "opis": "Data dokonania czynności w formacie YYYY-MM-DD"}, default=None)
 
 	# FIZYCZNA
 	pesel: str | None = field(metadata={"id": "PESEL"}, default=None)
-	imie_pierwsze: str | None = field(metadata={"id": "ImiePierwsze"}, default=None)
+	imie_pierwsze: str | None = field(metadata={"id": "ImiePierwsze", "opis": "Pierwsze imie"}, default=None)
 	nazwisko: str | None = field(metadata={"id": "Nazwisko"}, default=None)
 	data_urodzenia: str | None = field(metadata={"id": "DataUrodzenia"}, default=None)
 
@@ -31,7 +48,7 @@ class PCC3Declaration:
 	nr_domu: str | None = field(metadata={"id": "NrDomu"}, default=None)
 	nr_lokalu: str | None = field(metadata={"id": "NrLokalu"}, default=None)
 	miejscowosc: str | None = field(metadata={"id": "Miejscowosc"}, default=None)
-	kod_pocztowy: str | None = field(metadata={"id": "KodPocztowy"}, default=None)
+	kod_pocztowy: str | None = field(metadata={"id": "KodPocztowy", "opis": "Kod pocztowy w formacie NN-NNN"}, default=None)
 
 	# SZCZEGOLY
 	podmiot: int | None = field(metadata={"id": "P_7", "opis": "Podmiot składający deklarację: 1 - podmiot zobowiązany solidarnie do zapłaty podatku, 5 - inny podmiot"}, default=None)
@@ -116,6 +133,8 @@ class PCC3Declaration:
 		P_62
 		:return: Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A
 		"""
+		if self.podmiot is not None and self.podmiot==1:
+			return 1
 		return 0
 
 	# FLAGI
@@ -141,11 +160,14 @@ class PCC3Declaration:
 		hidden_fields = self.get_hidden_fields()
 		for f in fields(self):
 			value = getattr(self, f.name)
+			errs = None
 			if value is not None:
-				continue
+				errs = VALIDATION_LOGIC.get(f.name, lambda x: None)(value)
+				if errs is None:
+					continue
 			_id = f.metadata.get("id", f.name)
 			if _id in hidden_fields:
 				continue
 			description = f.metadata.get("opis")
-			unfilled_fields.append(RemainingField(f.name, description))
+			unfilled_fields.append(RemainingField(f.name, description, error=errs))
 		return unfilled_fields

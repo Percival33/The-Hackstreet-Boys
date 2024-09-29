@@ -1,5 +1,6 @@
 def triage_step_action():
-    return f'''I am an government specialist with expertise in customer service. I have a sharp attention to detail. My approach is methodical, filtering possible actions, to help my customer resolve his issue. I have a set of possible actions/tools that the user can take, and their descriptions. My job is to determine which actions/tools are unnecessary in my customers case. I return list of action numbers of unnecessary actions/tools based on their description and domain knowledge. I may keep all actions/tools if none of them are unnecessary.'''
+    return f'''I am an government specialist with expertise in customer service. I have a sharp attention to detail. My approach is methodical, filtering possible actions, to help my customer resolve his issue. 
+    I have a set of possible actions/tools that the user can take, and their descriptions. My job is to determine which actions/tools are unnecessary in my customers case. I return list of action numbers of unnecessary actions/tools based on their description and domain knowledge. I may keep all actions/tools if none of them are unnecessary.'''
 
 
 def triage_step_action_system(actions_str: str):
