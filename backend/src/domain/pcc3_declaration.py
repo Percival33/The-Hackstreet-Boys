@@ -122,26 +122,30 @@ class PCC3Declaration:
 	czy_fizyczna: bool | None = field(metadata={"id": "czy_fizyczna"}, default=None)
 	procent_podatku: str | None = field(metadata={"id": "procent_podatku"}, default=None)
 
+	def get_hidden_fields(self):
+		f = set()
+		if self.czy_fizyczna is not None:
+			f.update( ['NIP', 'PelnaNazwa', 'SkroconaNazwa'] if self.czy_fizyczna else ['PESEL', 'ImiePierwsze', 'Nazwisko', 'DataUrodzenia'])
+		if self.procent_podatku is not None:
+			if self.procent_podatku == "0.5":
+				l = ['P_26', 'P_24']
+			elif self.procent_podatku == "1":
+				l = ['P_26', 'P_49']
+			else:
+				l = ['P_24', 'P_49']
+			f.update(l)
+		return f
+
 	def get_remaining_fields(self) -> list[RemainingField]:
 		unfilled_fields = []
+		hidden_fields = self.get_hidden_fields()
 		for f in fields(self):
 			value = getattr(self, f.name)
 			if value is not None:
 				continue
 			_id = f.metadata.get("id", f.name)
-			if self.czy_fizyczna is not None:
-				if self.czy_fizyczna and _id in ['NIP', 'PelnaNazwa', 'SkroconaNazwa']:
-					continue
-				if not self.czy_fizyczna and _id in ['PESEL', 'ImiePierwsze', 'Nazwisko', 'DataUrodzenia']:
-					continue
-			if self.procent_podatku is not None:
-				if self.procent_podatku=='0.5' and _id in ['P_26', 'P_24']:
-					continue
-				if self.procent_podatku=='1' and _id in ['P_26', 'P_49']:
-					continue
-				if self.procent_podatku=='2' and _id in ['P_24', 'P_49']:
-					continue
-
+			if _id in hidden_fields:
+				continue
 			description = f.metadata.get("opis")
 			unfilled_fields.append(RemainingField(f.name, description))
 		return unfilled_fields
