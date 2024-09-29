@@ -78,7 +78,7 @@ class FormsModel:
 
         return response
 
-    def ask_question(self, conversation: Conversation):
+    def ask_question(self, conversation: Conversation) -> AskQuestionSchema | str:
         last_prompt = conversation.messages[-1].text
         responder = self.choose_responder(last_prompt)
         if responder.model == Model.EXPERT:
@@ -86,12 +86,12 @@ class FormsModel:
         elif responder.model == Model.FORMS:
             return self.form_question(conversation)
 
-    def expert_answer(self, conversation: Conversation):
+    def expert_answer(self, conversation: Conversation) -> str:
         domain_expert = DomainExpert(self.language)
         return domain_expert.respond(conversation, 5)
 
     @staticmethod
-    def choose_responder(prompt: str):
+    def choose_responder(prompt: str) -> ChooseModelSchema:
         logger.info(f"Choosing responder for prompt: {prompt}")
         creator = GptPromptCreator()
         gpt_client = GptClient()
@@ -112,7 +112,7 @@ class FormsModel:
         response = ChooseModelSchema(**response)
         return response
 
-    def form_question(self, conversation: Conversation):
+    def form_question(self, conversation: Conversation) -> AskQuestionSchema:
         schema = conversation.form.get_remaining_fields()
         schema_str = self.parse_schema(schema)
         creator = GptPromptCreator()
