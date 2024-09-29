@@ -52,30 +52,71 @@ class PCC3Declaration:
 	podstawa_opodatkowania_p05: int | None = field(metadata={"id": "P_40",
 															"opis": "Podstawa opodatkowania(opodatkowana wg stawki podatku 0.5%) określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"},
 												  default=None)
-	obliczony_podatek_czynnosci_p05: int | None = field(metadata={"id": "p_41",
-																 "opis": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 0.5%)"},
-													   default=None)
+
+	@property
+	def obliczony_podatek_czynnosci_p05(self) -> int:
+		"""
+		P_41
+		:return: Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 0.5%)
+		"""
+		val = self.podstawa_opodatkowania_p05 or 0.0
+		return round(val * 0.005)
+
 	# 1%
 	podstawa_opodatkowania_p1: int | None = field(metadata={"id": "P_24",
 															"opis": "Podstawa opodatkowania(opodatkowana wg stawki podatku 1%) określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych)"},
 												  default=None)
-	obliczony_podatek_czynnosci_p1: int | None = field(metadata={"id": "P_25",
-																 "opis": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 1%)"},
-													   default=None)
+	@property
+	def obliczony_podatek_czynnosci_p1(self) -> int:
+		"""
+		P_25
+		:return: Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 1%)
+		"""
+		val = self.podstawa_opodatkowania_p1 or 0.0
+		return round(val*0.01)
 
 	# 2%
 	podstawa_opodatkowania_p2: int | None = field(metadata={"id": "P_26",
 															"opis": "Podstawa opodatkowania(opodatkowana wg stawki podatku 2%) określona zgodnie z art. 6 ustawy (po zaokrągleniu do pełnych złotych). Podstawa opodatkowania dla umowy sprzedaży jest większa lub równa 1000 PLN;"},
 												  default=None)
-	obliczony_podatek_czynnosci_p2: int | None = field(metadata={"id": "P_27",
-																 "opis": "Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 2%)"},
-													   default=None)
+	@property
+	def obliczony_podatek_czynnosci_p2(self) -> int:
+		"""
+		P_27
+		:return: Obliczony należny podatek od czynności cywilnoprawnej (po zaokrągleniu do pełnych złotych) (opodatkowana wg stawki podatku 2%)
+		"""
+		val = self.podstawa_opodatkowania_p2 or 0.0
+		return round(val*0.02)
 
-	kwota_podatku: int | None = field(metadata={"id": "P_46", "opis": "Kwota należnego podatku"}, default=None)
-	kwota_do_zaplaty: int | None = field(metadata={"id": "P_53", "opis": "Kwota podatku do zapłaty"}, default=None)
-	ilosc_zalocznikow: int | None = field(
-		metadata={"id": "P_62", "opis": "Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A"},
-		default=0)
+	@property
+	def kwota_podatku(self) -> int:
+		"""
+		P_46
+		:return: Kwota należnego podatku
+		"""
+		if self.procent_podatku is not None:
+			if self.procent_podatku=='0.5':
+				return round(self.obliczony_podatek_czynnosci_p05)
+			if self.procent_podatku=='1':
+				return round(self.obliczony_podatek_czynnosci_p1)
+			else:
+				return round(self.obliczony_podatek_czynnosci_p2)
+		return 0
+	@property
+	def kwota_do_zaplaty(self) -> int:
+		"""
+		P_53
+		:return: Kwota podatku do zapłaty
+		"""
+		return self.kwota_podatku
+
+	@property
+	def ilosc_zalocznikow(self) -> int:
+		"""
+		P_62
+		:return: Informacja o załącznikach - Liczba dołączonych załączników PCC-3/A
+		"""
+		return 0
 
 	# FLAGI
 	czy_fizyczna: bool | None = field(metadata={"id": "czy_fizyczna"}, default=None)
@@ -88,19 +129,17 @@ class PCC3Declaration:
 			if value is not None:
 				continue
 			_id = f.metadata.get("id", f.name)
-			if _id in ['P_27', 'P_25', 'P_46', 'P_53', 'P_62', 'P_41']:
-				continue
 			if self.czy_fizyczna is not None:
 				if self.czy_fizyczna and _id in ['NIP', 'PelnaNazwa', 'SkroconaNazwa']:
 					continue
 				if not self.czy_fizyczna and _id in ['PESEL', 'ImiePierwsze', 'Nazwisko', 'DataUrodzenia']:
 					continue
 			if self.procent_podatku is not None:
-				if self.procent_podatku=='0.5' and _id in ['P_26', 'P_27', 'P_24', 'P_25']:
+				if self.procent_podatku=='0.5' and _id in ['P_26', 'P_24']:
 					continue
-				if self.procent_podatku=='1' and _id in ['P_26', 'P_27', 'P_40', 'P_41']:
+				if self.procent_podatku=='1' and _id in ['P_26', 'P_40']:
 					continue
-				if self.procent_podatku=='2' and _id in ['P_24', 'P_25', 'P_40', 'P_41']:
+				if self.procent_podatku=='2' and _id in ['P_24', 'P_40']:
 					continue
 
 			description = f.metadata.get("opis")
